@@ -1301,6 +1301,7 @@ var stage  = document.getElementById('stage');
 var video  = document.getElementById('hero');
 var ring   = document.querySelector('.ring');
 var poster = document.querySelector('.poster');
+var bandsEl = document.getElementById('bands');
 var bandEls = [].slice.call(document.querySelectorAll('.band'));
 
 /* ---------------------------------------------------------------
@@ -1392,6 +1393,15 @@ function heroProgress(){
   if (range <= 0) return 0;
   return clamp(-hero.getBoundingClientRect().top / range, 0, 1);
 }
+/* una vez el pin se suelta al final del hero, el texto ya debe haberse
+   apagado: si no, se ve cortado por el borde de la ventana al deslizar */
+function heroReleaseFrac(){
+  if (!hero) return 0;
+  var range = hero.offsetHeight - window.innerHeight;
+  if (range <= 0) return 0;
+  var raw = -hero.getBoundingClientRect().top;
+  return clamp((raw - range) / window.innerHeight, 0, 1);
+}
 
 var seekBusy = false, pendingTime = null;
 function requestSeek(t){
@@ -1418,6 +1428,10 @@ function tick(now){
   else { rafId = requestAnimationFrame(tick); }
   if (video && video.duration) requestSeek(shown * video.duration);
   updateCaptions(shown);
+  if (bandsEl){
+    var relOp = (1 - heroReleaseFrac()).toFixed(3);
+    if (bandsEl.style.opacity !== relOp) bandsEl.style.opacity = relOp;
+  }
 }
 function onScroll(){
   target = heroProgress();
