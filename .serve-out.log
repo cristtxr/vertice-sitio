@@ -1,0 +1,19 @@
+ INFO  Accepting connections at http://localhost:8899
+ HTTP  15/9/2026 1:54:28 p. m. 127.0.0.1 GET /
+ HTTP  15/9/2026 1:54:28 p. m. 127.0.0.1 Returned 200 in 39 ms
+ HTTP  15/9/2026 1:54:30 p. m. 127.0.0.1 GET /assets/hero-poster-movil.webp
+ HTTP  15/9/2026 1:54:30 p. m. 127.0.0.1 Returned 200 in 5 ms
+ HTTP  15/9/2026 1:54:31 p. m. 127.0.0.1 GET /assets/hero-scrub-movil.mp4
+ HTTP  15/9/2026 1:54:31 p. m. 127.0.0.1 Returned 200 in 20 ms
+ HTTP  15/9/2026 1:54:32 p. m. 127.0.0.1 GET /favicon.ico
+ HTTP  15/9/2026 1:54:32 p. m. 127.0.0.1 Returned 404 in 363 ms
+ HTTP  15/9/2026 1:54:57 p. m. 127.0.0.1 GET /assets/obra-corte-900.webp
+ HTTP  15/9/2026 1:54:57 p. m. 127.0.0.1 GET /assets/obra-patio-900.webp
+ HTTP  15/9/2026 1:54:57 p. m. 127.0.0.1 Returned 200 in 8 ms
+ HTTP  15/9/2026 1:54:57 p. m. 127.0.0.1 Returned 200 in 18 ms
+ HTTP  15/9/2026 1:55:48 p. m. 127.0.0.1 GET /assets/obra-niebla-900.webp
+ HTTP  15/9/2026 1:55:48 p. m. 127.0.0.1 Returned 200 in 13 ms
+ HTTP  15/9/2026 1:55:48 p. m. 127.0.0.1 GET /assets/la-hora-1600.webp
+ HTTP  15/9/2026 1:55:48 p. m. 127.0.0.1 Returned 200 in 11 ms
+ HTTP  15/9/2026 1:55:48 p. m. 127.0.0.1 GET /assets/obra-ladera-900.webp
+ HTTP  15/9/2026 1:55:48 p. m. 127.0.0.1 Returned 200 in 7 ms

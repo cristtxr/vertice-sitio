@@ -575,12 +575,9 @@ body.bloqueado{overflow:hidden}
 .casaCard b{display:block;font-family:var(--display);font-weight:300;font-size:clamp(19px,2vw,25px);color:#F8F4EF;letter-spacing:-.02em;margin-bottom:10px}
 .casaCard p{margin:0;font-size:13.5px;line-height:1.58;color:rgba(246,242,237,.78);max-width:32ch}
 @media (max-width:700px){
-  .porquePin{height:auto}
-  .porque{position:relative;height:auto;max-height:none;min-height:0;padding:clamp(48px,10vh,90px) 0}
-  .pistaWrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity;scrollbar-width:none}
-  .pistaWrap::-webkit-scrollbar{display:none}
-  .pista{transform:none !important}
-  .casaCard{flex:0 0 78vw;scroll-snap-align:start}
+  .porquePin{height:260vh}
+  .porque{height:calc(100vh - 12px);margin:0 6px}
+  .casaCard{flex:0 0 82vw}
 }
 
 /* ---------- 06 CÓMO SE COMPRA · medio círculo al lado, cards por scroll ---------- */
@@ -589,48 +586,61 @@ body.bloqueado{overflow:hidden}
 .procesoStage{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;
   padding-left:max(var(--gutter), calc((100vw - 1360px) / 2))}
 .arcoLado{
-  position:absolute;top:50%;right:0;transform:translate(38%,-50%);
+  position:absolute;top:50%;right:0;transform:translate(38%,-50%) rotate(var(--rot,0deg));
   width:min(58vw,620px);aspect-ratio:1;border-radius:50%;
   border:1px solid var(--line);
-  background:radial-gradient(circle at 30% 50%, rgba(233,184,119,.18), transparent 62%);
-  pointer-events:none;z-index:0;
+  background:radial-gradient(circle at 24% 50%, rgba(233,184,119,.24), transparent 60%);
+  pointer-events:none;z-index:0;will-change:transform;
 }
-.pasos{position:relative;z-index:1;display:grid;gap:16px;max-width:min(560px,86vw)}
-.paso{padding:clamp(24px,2.6vw,34px);border-radius:var(--r-md);background:var(--panel);
+.arcoLado::after{content:"";position:absolute;top:6%;left:50%;width:9px;height:9px;margin-left:-4.5px;
+  border-radius:50%;background:var(--accent);box-shadow:0 0 16px 3px rgba(233,184,119,.7)}
+.pasos{position:relative;z-index:1;width:min(560px,86vw);height:clamp(230px,30vh,300px)}
+.paso{position:absolute;inset:0;padding:clamp(24px,2.6vw,34px);border-radius:var(--r-md);background:var(--panel);
   border:1px solid var(--line);box-shadow:0 20px 50px rgba(24,20,16,.07);
-  opacity:0;transform:translateY(36px) scale(.97);
-  transition:opacity .7s var(--ease-soft),transform .8s var(--ease)}
-.paso.on{opacity:1;transform:none}
+  opacity:0;transform:translateY(30px) scale(.97);pointer-events:none;
+  transition:opacity .5s var(--ease-soft),transform .6s var(--ease)}
+.paso.on{opacity:1;transform:none;pointer-events:auto}
 .paso .n{font-family:var(--display);font-weight:200;font-size:42px;line-height:1;color:var(--accent);letter-spacing:-.04em}
 .paso b{display:block;font-weight:500;font-size:15px;margin:16px 0 8px}
 .paso p{margin:0;font-size:14px;line-height:1.6;color:var(--muted)}
+.pasoDots{position:relative;z-index:1;display:flex;gap:8px;margin-top:18px}
+.pasoDots i{width:22px;height:3px;border-radius:2px;background:var(--line);transition:background .4s var(--ease-soft),width .4s var(--ease)}
+.pasoDots i.on{background:var(--accent);width:34px}
 @media (max-width:900px){
-  .procesoPin{height:220vh}
-  .arcoLado{width:70vw;transform:translate(46%,-50%)}
+  .procesoPin{height:240vh}
+  .arcoLado{width:78vw;transform:translate(48%,-50%) rotate(var(--rot,0deg))}
+  .pasos{height:clamp(240px,42vh,320px)}
 }
-.garantia{
-  margin-top:14px;padding:clamp(26px,3vw,40px);border-radius:var(--r-md);
-  background:var(--canvas-2);border:1px solid var(--line);
-  display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,60px);align-items:baseline;
-}
-.garantia div b{display:block;font-family:var(--display);font-weight:200;font-size:clamp(30px,3.4vw,48px);line-height:1;letter-spacing:-.04em}
-.garantia div span{font-size:13px;color:var(--muted)}
-.garantia .pie{font-size:13.5px;color:var(--muted);margin-left:auto;max-width:26ch}
 
-/* ---------- testimonios · aparecen en horizontal ---------- */
-.quotes{display:flex;gap:14px;margin-top:clamp(36px,6vh,72px);overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:8px;scrollbar-width:none}
+/* ---------- garantía · cards con parallax ---------- */
+.garantia{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.gcard{padding:clamp(26px,3vw,38px);border-radius:var(--r-md);background:var(--panel);border:1px solid var(--line);
+  box-shadow:0 20px 50px rgba(24,20,16,.06);will-change:transform;transition:box-shadow .4s var(--ease-soft)}
+.gcard:hover{box-shadow:0 26px 60px rgba(24,20,16,.12)}
+.gcard b{display:block;font-family:var(--display);font-weight:200;font-size:clamp(40px,5vw,64px);line-height:1;letter-spacing:-.04em;color:var(--accent)}
+.gcard span{display:block;margin-top:10px;font-size:13.5px;color:var(--muted)}
+.garantiaPie{margin-top:16px;font-size:13.5px;color:var(--muted);text-align:right}
+@media (max-width:640px){.garantia{grid-template-columns:1fr}.garantiaPie{text-align:left}}
+
+/* ---------- testimonios · franja horizontal con parallax propio ---------- */
+.quotes{display:flex;gap:14px;margin-top:clamp(36px,6vh,72px);overflow-x:auto;scroll-snap-type:x proximity;
+  padding-bottom:8px;scrollbar-width:none}
 .quotes::-webkit-scrollbar{display:none}
-.quote{flex:0 0 min(420px,82vw);scroll-snap-align:start;padding:clamp(26px,3vw,40px);border-radius:var(--r-md);background:var(--panel);border:1px solid var(--line);
-  opacity:0;transform:translateX(70px);transition:opacity .8s var(--ease-soft),transform .9s var(--ease)}
-.quote.on{opacity:1;transform:none}
-.quote:nth-child(2){transition-delay:.08s}
-.quote:nth-child(3){transition-delay:.16s}
-.quote:nth-child(4){transition-delay:.24s}
+.quote{flex:0 0 min(400px,76vw);scroll-snap-align:start;padding:clamp(26px,3vw,40px);border-radius:var(--r-md);
+  background:var(--panel);border:1px solid var(--line);box-shadow:0 16px 40px rgba(24,20,16,.05);
+  opacity:0;will-change:transform;transition:opacity .7s var(--ease-soft)}
+.quote.on{opacity:1}
 .quote p{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(18px,1.9vw,25px);line-height:1.38;letter-spacing:-.018em}
 .quote cite{display:block;font-style:normal;font-size:13px;color:var(--muted);margin-top:20px}
-.cifras-row{display:flex;flex-wrap:wrap;gap:clamp(24px,5vw,80px);margin-top:clamp(34px,5vh,56px)}
-.cifras-row div b{display:block;font-family:var(--display);font-weight:200;font-size:clamp(38px,5vw,76px);line-height:1;letter-spacing:-.045em}
+.cifras-row{display:grid;grid-template-columns:repeat(4,auto);gap:clamp(20px,4vw,56px);margin-top:clamp(34px,5vh,56px)}
+.cifras-row div{will-change:transform}
+.cifras-row div:not(:first-child){border-left:1px solid var(--line);padding-left:clamp(18px,3vw,36px)}
+.cifras-row div b{display:block;font-family:var(--display);font-weight:200;font-size:clamp(34px,5vw,76px);line-height:1;letter-spacing:-.045em}
 .cifras-row div span{font-size:13px;color:var(--muted)}
+@media (max-width:900px){
+  .cifras-row{grid-template-columns:repeat(2,1fr);row-gap:clamp(30px,6vh,48px)}
+  .cifras-row div:nth-child(3){border-left:none;padding-left:0}
+}
 
 /* ---------- preguntas ---------- */
 .faq{margin-top:clamp(34px,6vh,70px);border-top:1px solid var(--line)}
@@ -717,7 +727,6 @@ footer .inner{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between
   .nav > .pill{margin-left:auto}
   .sobre .notas,.sobre .duo{grid-template-columns:1fr}
   .section.dark,.obras,.conversacion,.holder,.porque{margin:0 6px;border-radius:var(--r-lg)}
-  .garantia .pie{margin-left:0}
 }
 @media (max-height:560px){.cue,.ring{display:none}}
 
@@ -732,7 +741,9 @@ footer .inner{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between
   .ambient{animation:none}
   .dust{display:none}
   .obra .linea{opacity:1;transform:none}
-  .paso,.quote{opacity:1;transform:none}
+  .quote{opacity:1}
+  .paso{transition:none}
+  .gcard,.cifras-row div,.arcoLado{transform:none !important}
 }
 body.paused *,body.paused *::before,body.paused *::after{animation-play-state:paused !important}
 </style>
@@ -1073,17 +1084,17 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </div>
 
     <div class="cifras-row part">
-      <div><b>15</b><span>años construyendo en México</span></div>
-      <div><b>120</b><span>residencias entregadas</span></div>
-      <div><b>98%</b><span>volvería a comprarnos</span></div>
-      <div><b>45</b><span>días hábiles a escrituras</span></div>
+      <div data-para="0.05"><b>15</b><span>años construyendo en México</span></div>
+      <div data-para="-0.07"><b>120</b><span>residencias entregadas</span></div>
+      <div data-para="0.06"><b>98%</b><span>volvería a comprarnos</span></div>
+      <div data-para="-0.05"><b>45</b><span>días hábiles a escrituras</span></div>
     </div>
 
     <div class="quotes">
-      <figure class="quote"><p>“Pedí una casa sin pasillos. Me entregaron una casa sin pasillos. Nadie más aceptó el encargo.”</p><cite>María Estrada · Casa Ladera</cite></figure>
-      <figure class="quote"><p>“Firmé en marzo, entregaron en octubre. La fecha no se movió un solo día.”</p><cite>Julián Reyes · Torre Norte 06B</cite></figure>
-      <figure class="quote"><p>“La casa no tiene aire acondicionado. En mayo, a las tres de la tarde, no hace falta.”</p><cite>Ana Villalobos · Casa Patio</cite></figure>
-      <figure class="quote"><p>“Discutimos nueve meses el voladizo. Tenían razón ellos.”</p><cite>Rodrigo Lem · Casa Corte</cite></figure>
+      <figure class="quote" data-para="0.04"><p>“Pedí una casa sin pasillos. Me entregaron una casa sin pasillos. Nadie más aceptó el encargo.”</p><cite>María Estrada · Casa Ladera</cite></figure>
+      <figure class="quote" data-para="-0.06"><p>“Firmé en marzo, entregaron en octubre. La fecha no se movió un solo día.”</p><cite>Julián Reyes · Torre Norte 06B</cite></figure>
+      <figure class="quote" data-para="0.07"><p>“La casa no tiene aire acondicionado. En mayo, a las tres de la tarde, no hace falta.”</p><cite>Ana Villalobos · Casa Patio</cite></figure>
+      <figure class="quote" data-para="-0.05"><p>“Discutimos nueve meses el voladizo. Tenían razón ellos.”</p><cite>Rodrigo Lem · Casa Corte</cite></figure>
     </div>
   </div>
 </section>
@@ -1093,29 +1104,32 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <div class="inner">
     <div class="sechead part">
       <h2 class="big">cómo se <span class="tint">compra</span></h2>
-      <span class="tag">cuatro etapas · cuarenta y cinco días</span>
+      <span class="tag">cuatro etapas · cuarenta y cinco días · desliza</span>
     </div>
   </div>
 
   <div class="procesoPin part" id="procesoPin">
     <div class="procesoStage">
       <div class="arcoLado" aria-hidden="true"></div>
-      <div class="pasos" id="pasosList">
-        <div class="paso" data-at="0.04"><span class="n">01</span><b>Visita técnica</b><p>Recorres el terreno o la unidad con el arquitecto del proyecto. Sesenta minutos, sin costo.</p></div>
-        <div class="paso" data-at="0.32"><span class="n">02</span><b>Carta de intención</b><p>Apartas con el 5% del valor. Reembolsable completo hasta la firma.</p></div>
-        <div class="paso" data-at="0.6"><span class="n">03</span><b>Compraventa</b><p>Ante notario, con penalización por retraso a cargo nuestro. Escrita, no prometida.</p></div>
-        <div class="paso" data-at="0.86"><span class="n">04</span><b>Escrituración</b><p>Cuarenta y cinco días hábiles de promedio, de principio a fin.</p></div>
+      <div>
+        <div class="pasos" id="pasosList">
+          <div class="paso"><span class="n">01</span><b>Visita técnica</b><p>Recorres el terreno o la unidad con el arquitecto del proyecto. Sesenta minutos, sin costo.</p></div>
+          <div class="paso"><span class="n">02</span><b>Carta de intención</b><p>Apartas con el 5% del valor. Reembolsable completo hasta la firma.</p></div>
+          <div class="paso"><span class="n">03</span><b>Compraventa</b><p>Ante notario, con penalización por retraso a cargo nuestro. Escrita, no prometida.</p></div>
+          <div class="paso"><span class="n">04</span><b>Escrituración</b><p>Cuarenta y cinco días hábiles de promedio, de principio a fin.</p></div>
+        </div>
+        <div class="pasoDots" id="pasoDots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
       </div>
     </div>
   </div>
 
   <div class="inner">
     <div class="garantia part">
-      <div><b>10</b><span>años en estructura</span></div>
-      <div><b>5</b><span>años en instalaciones ocultas</span></div>
-      <div><b>2</b><span>años en acabados</span></div>
-      <p class="pie">La póliza de garantía se transfiere al siguiente propietario.</p>
+      <div class="gcard" data-para="0.05"><b>10</b><span>años en estructura</span></div>
+      <div class="gcard" data-para="-0.07"><b>5</b><span>años en instalaciones ocultas</span></div>
+      <div class="gcard" data-para="0.06"><b>2</b><span>años en acabados</span></div>
     </div>
+    <p class="garantiaPie part">La póliza de garantía se transfiere al siguiente propietario.</p>
   </div>
 </section>
 
@@ -1612,9 +1626,8 @@ revelaTick();
    --------------------------------------------------------------- */
 var porquePin = document.getElementById('porquePin');
 var pista = document.getElementById('pista');
-var MQ_PORQUE_MOBIL = matchMedia('(max-width:700px)');
 function porqueTick(){
-  if (!porquePin || !pista || MQ_PORQUE_MOBIL.matches) return;
+  if (!porquePin || !pista) return;
   var r = porquePin.getBoundingClientRect();
   var total = r.height - innerHeight;
   var prog = total > 0 ? clamp(-r.top / total, 0, 1) : 0;
@@ -1626,23 +1639,46 @@ addEventListener('resize', porqueTick);
 porqueTick();
 
 /* ---------------------------------------------------------------
-   8c · cómo se compra · una card nueva por cada tramo de scroll
+   8c · cómo se compra · un paso a la vez, el círculo gira con el scroll
    --------------------------------------------------------------- */
 var procesoPin = document.getElementById('procesoPin');
 var pasoEls = [].slice.call(document.querySelectorAll('#pasosList .paso'));
+var dotEls = [].slice.call(document.querySelectorAll('#pasoDots i'));
+var arcoLado = document.querySelector('.arcoLado');
 function procesoTick(){
   if (!procesoPin || !pasoEls.length) return;
   var r = procesoPin.getBoundingClientRect();
   var total = r.height - innerHeight;
   var prog = total > 0 ? clamp(-r.top / total, 0, 1) : 0;
-  pasoEls.forEach(function(el){
-    var at = parseFloat(el.dataset.at) || 0;
-    if (prog >= at) el.classList.add('on');
-  });
+  var idx = Math.min(pasoEls.length - 1, Math.floor(prog * pasoEls.length));
+  if (prog <= 0) idx = 0;
+  pasoEls.forEach(function(el, i){ el.classList.toggle('on', i === idx); });
+  dotEls.forEach(function(el, i){ el.classList.toggle('on', i === idx); });
+  if (arcoLado) arcoLado.style.setProperty('--rot', (prog * 230).toFixed(1) + 'deg');
 }
 addEventListener('scroll', procesoTick, { passive: true });
 addEventListener('resize', procesoTick);
 procesoTick();
+
+/* ---------------------------------------------------------------
+   8d · parallax suave · cifras, testimonios y garantías se mueven al scroll
+   --------------------------------------------------------------- */
+var REDUCE_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var paraEls = [].slice.call(document.querySelectorAll('[data-para]'));
+function parallaxTick(){
+  if (REDUCE_MOTION || !paraEls.length) return;
+  var vc = innerHeight / 2;
+  paraEls.forEach(function(el){
+    var r = el.getBoundingClientRect();
+    if (r.bottom < -200 || r.top > innerHeight + 200) return;
+    var ec = r.top + r.height / 2;
+    var speed = parseFloat(el.dataset.para) || 0;
+    el.style.transform = 'translateY(' + ((vc - ec) * speed).toFixed(1) + 'px)';
+  });
+}
+addEventListener('scroll', parallaxTick, { passive: true });
+addEventListener('resize', parallaxTick);
+parallaxTick();
 
 /* polvo en suspensión, solo sobre la sección con imagen */
 (function buildDust(){
@@ -1687,7 +1723,9 @@ if (form){
    --------------------------------------------------------------- */
 function pinToFinalStates(){
   document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in','settled'); });
-  document.querySelectorAll('.paso,.quote').forEach(function(el){ el.classList.add('on'); });
+  document.querySelectorAll('.quote').forEach(function(el){ el.classList.add('on'); });
+  if (pasoEls.length){ pasoEls[pasoEls.length - 1].classList.add('on'); }
+  if (dotEls.length){ dotEls[dotEls.length - 1].classList.add('on'); }
   if (holder){
     holdDone = true;
     holder.style.setProperty('--h','1');
