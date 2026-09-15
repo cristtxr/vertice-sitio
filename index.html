@@ -586,7 +586,8 @@ body.bloqueado{overflow:hidden}
 /* ---------- 06 CÓMO SE COMPRA · medio círculo al lado, cards por scroll ---------- */
 .circuito{position:relative;margin-top:clamp(44px,7vh,84px)}
 .procesoPin{position:relative;height:280vh}
-.procesoStage{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden}
+.procesoStage{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;
+  padding-left:max(var(--gutter), calc((100vw - 1360px) / 2))}
 .arcoLado{
   position:absolute;top:50%;right:0;transform:translate(38%,-50%);
   width:min(58vw,620px);aspect-ratio:1;border-radius:50%;
