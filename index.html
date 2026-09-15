@@ -330,12 +330,11 @@ main{position:relative;z-index:2}
   box-shadow:0 6px 20px rgba(24,20,16,.16);
 }
 .sobre .lede{margin-left:auto;margin-top:clamp(30px,5vh,58px)}
-.sobre .grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(28px,5vw,74px);align-items:end;margin-top:clamp(40px,7vh,88px)}
-.sobre .notas{display:grid;gap:24px;align-content:end}
-.sobre .notas p{font-size:14.5px;line-height:1.66;color:var(--muted);margin:0;max-width:44ch}
-.sobre .duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.sobre .duo img{border-radius:var(--r-md);aspect-ratio:3/4;object-fit:cover;width:100%;height:auto}
-.sobre .duo img:last-child{margin-top:clamp(24px,5vh,54px)}
+.sobre .grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);align-items:start;margin-top:clamp(28px,5vh,56px)}
+.sobre .notas{display:grid;gap:14px;align-content:start}
+.sobre .notas p{font-size:13px;line-height:1.56;color:var(--muted);margin:0;max-width:38ch}
+.sobre .duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sobre .duo img{border-radius:var(--r-sm);aspect-ratio:4/3;object-fit:cover;width:100%;height:auto}
 @media (max-width:640px){
   .sobre .lede{font-size:clamp(25px,7.4vw,32px);line-height:1.24;max-width:none;margin-left:0;letter-spacing:-.018em}
   .sobre .lede .chip-img{display:none}
@@ -567,7 +566,7 @@ body.bloqueado{overflow:hidden}
 .porque .phead .tag{color:rgba(248,244,239,.6)}
 .pistaWrap{overflow:hidden;width:100%}
 .pista{display:flex;gap:clamp(14px,1.6vw,22px);will-change:transform;padding:0 var(--gutter)}
-.casaCard{position:relative;flex:0 0 clamp(260px,58vw,520px);aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;background:#221F1C}
+.casaCard{position:relative;flex:0 0 clamp(320px,44vw,620px);aspect-ratio:4/3;border-radius:var(--r-lg);overflow:hidden;background:#221F1C}
 .casaCard img{width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.95)}
 .casaCard .tcara{position:absolute;inset:0;padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;justify-content:flex-end;
   background:linear-gradient(to top,rgba(10,8,7,.9) 0%,rgba(10,8,7,.5) 42%,rgba(10,8,7,.05) 78%)}
@@ -580,21 +579,26 @@ body.bloqueado{overflow:hidden}
   .casaCard{flex:0 0 82vw}
 }
 
-/* ---------- 06 CÓMO SE COMPRA · medio círculo al lado, cards por scroll ---------- */
+/* ---------- 06 CÓMO SE COMPRA · anillo de progreso radial real ---------- */
 .circuito{position:relative;margin-top:clamp(44px,7vh,84px)}
 .procesoPin{position:relative;height:280vh}
 .procesoStage{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;
   padding-left:max(var(--gutter), calc((100vw - 1360px) / 2))}
 .arcoLado{
-  position:absolute;top:50%;right:0;transform:translate(38%,-50%) rotate(var(--rot,0deg));
-  width:min(58vw,620px);aspect-ratio:1;border-radius:50%;
-  border:1px solid var(--line);
-  background:radial-gradient(circle at 24% 50%, rgba(233,184,119,.24), transparent 60%);
-  pointer-events:none;z-index:0;will-change:transform;
+  position:absolute;top:50%;right:0;transform:translate(30%,-50%);
+  width:min(56vw,600px);aspect-ratio:1;pointer-events:none;z-index:0;overflow:visible;
 }
-.arcoLado::after{content:"";position:absolute;top:6%;left:50%;width:9px;height:9px;margin-left:-4.5px;
-  border-radius:50%;background:var(--accent);box-shadow:0 0 16px 3px rgba(233,184,119,.7)}
-.procesoContent{display:flex;align-items:center;gap:clamp(18px,3vw,36px);position:relative;z-index:1}
+.ringTrack{fill:none;stroke:var(--line);stroke-width:1.2}
+.ringFill{fill:none;stroke:var(--accent);stroke-width:1.2;stroke-linecap:round;
+  transform-origin:100px 100px;transform:rotate(-90deg) scaleX(-1);
+  stroke-dasharray:565.48;stroke-dashoffset:565.48;
+  transition:stroke-dashoffset .25s linear;will-change:stroke-dashoffset}
+.ringNodo{fill:var(--panel);stroke:var(--line);stroke-width:1.2;transition:all .4s var(--ease-soft)}
+.ringNodo.on{fill:var(--ink);stroke:var(--ink)}
+.ringTxt{font-family:var(--sans);font-weight:600;font-size:11px;fill:var(--muted-2);
+  text-anchor:middle;dominant-baseline:central;pointer-events:none;transition:fill .4s var(--ease-soft)}
+.ringTxt.on{fill:#fff}
+.procesoContent{display:flex;align-items:center;position:relative;z-index:1}
 .pasos{position:relative;width:min(560px,86vw);height:clamp(260px,32vh,320px);flex:none}
 .paso{position:absolute;inset:0;padding:clamp(30px,3.2vw,44px);border-radius:var(--r-xl);background:var(--panel);
   border:1px solid var(--line);box-shadow:0 24px 60px rgba(24,20,16,.08);
@@ -605,31 +609,31 @@ body.bloqueado{overflow:hidden}
 .paso .n{font-family:var(--display);font-weight:300;font-size:clamp(48px,5.4vw,68px);line-height:1;color:var(--accent);letter-spacing:-.03em}
 .paso b{display:block;font-family:var(--sans);font-weight:600;font-size:clamp(21px,2.2vw,27px);letter-spacing:-.015em;margin:18px 0 10px;color:var(--ink)}
 .paso p{margin:0;font-family:var(--sans);font-size:clamp(15.5px,1.3vw,17px);line-height:1.55;color:var(--ink-soft);max-width:40ch}
-.pasoDots{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px;flex:none}
-.pasoDots i{
-  width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
-  font-family:var(--sans);font-weight:600;font-size:12.5px;color:var(--muted-2);
-  border:1px solid var(--line);background:var(--panel);font-style:normal;
-  transition:all .4s var(--ease-soft);
-}
-.pasoDots i.on{background:var(--ink);border-color:var(--ink);color:#fff;transform:scale(1.08)}
 @media (max-width:900px){
   .procesoPin{height:240vh}
-  .arcoLado{width:78vw;transform:translate(48%,-50%) rotate(var(--rot,0deg))}
-  .procesoContent{flex-direction:column;align-items:flex-start;gap:20px}
+  .arcoLado{width:74vw;transform:translate(42%,-50%)}
   .pasos{height:clamp(260px,44vh,340px);width:100%}
-  .pasoDots{flex-direction:row;order:-1}
 }
 
-/* ---------- garantía · cards con parallax, estilo ficha clara ---------- */
-.garantia{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
-.gcard{padding:clamp(28px,3vw,40px);border-radius:var(--r-xl);background:var(--panel);border:1px solid var(--line);
-  box-shadow:0 20px 50px rgba(24,20,16,.06);will-change:transform;transition:box-shadow .4s var(--ease-soft),transform .4s var(--ease)}
-.gcard:hover{box-shadow:0 26px 60px rgba(24,20,16,.12);transform:translateY(-4px)}
-.gcard b{display:block;font-family:var(--display);font-weight:300;font-size:clamp(46px,5.4vw,68px);line-height:1;letter-spacing:-.03em;color:var(--accent)}
-.gcard span{display:block;margin-top:12px;font-family:var(--sans);font-weight:500;font-size:14.5px;color:var(--ink-soft)}
-.garantiaPie{margin-top:16px;font-size:13.5px;color:var(--muted);text-align:right}
-@media (max-width:640px){.garantia{grid-template-columns:1fr}.garantiaPie{text-align:left}}
+/* ---------- garantía · bento editorial, número + ficha destacada ---------- */
+.garantia{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:auto auto;gap:14px;margin-top:14px}
+.gcard{position:relative;padding:clamp(26px,2.8vw,36px);border-radius:var(--r-xl);background:var(--panel);border:1px solid var(--line);
+  box-shadow:0 16px 40px rgba(24,20,16,.05);will-change:transform;transition:box-shadow .4s var(--ease-soft),transform .4s var(--ease)}
+.gcard:hover{box-shadow:0 24px 56px rgba(24,20,16,.1);transform:translateY(-4px)}
+.gcard .gn{display:block;font-family:var(--sans);font-weight:600;font-size:11.5px;letter-spacing:.1em;color:var(--muted);margin-bottom:auto}
+.gcard b{display:block;font-family:var(--display);font-weight:300;font-size:clamp(40px,4.6vw,58px);line-height:1;letter-spacing:-.03em;color:var(--accent);margin-top:20px}
+.gcard span{display:block;margin-top:10px;font-family:var(--sans);font-weight:500;font-size:14px;color:var(--ink-soft)}
+.gcard.feat{grid-row:1 / 3;background:var(--ink);border-color:var(--ink);color:#fff;display:flex;flex-direction:column}
+.gcard.feat .gn{color:rgba(245,241,236,.5)}
+.gcard.feat b{color:var(--sun);font-size:clamp(56px,6.4vw,84px)}
+.gcard.feat span{color:rgba(245,241,236,.72);font-size:15px;max-width:22ch}
+.gcard.feat .garrow{margin-top:auto;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.12);
+  display:grid;place-items:center;align-self:flex-end}
+.gcard.feat .garrow svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none}
+.gcard.pie{grid-column:2 / 4;display:flex;align-items:center;background:var(--canvas-2);box-shadow:none}
+.gcard.pie span{margin:0;font-size:14.5px;color:var(--ink-soft);max-width:52ch}
+@media (max-width:900px){.garantia{grid-template-columns:1fr 1fr}.gcard.feat{grid-row:1/2;grid-column:1/3}.gcard.pie{grid-column:1/3}}
+@media (max-width:640px){.garantia{grid-template-columns:1fr}.gcard.feat,.gcard.pie{grid-column:1/2}}
 
 /* ---------- testimonios · carrusel horizontal que gira solo ---------- */
 .quotesWrap{
@@ -1156,9 +1160,12 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
   <div class="procesoPin part" id="procesoPin">
     <div class="procesoStage">
-      <div class="arcoLado" aria-hidden="true"></div>
+      <svg class="arcoLado" id="arcoLado" viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="ringTrack" cx="100" cy="100" r="90"></circle>
+        <circle class="ringFill" id="ringFill" cx="100" cy="100" r="90"></circle>
+        <g id="ringNodos"></g>
+      </svg>
       <div class="procesoContent">
-        <div class="pasoDots" id="pasoDots" aria-hidden="true"><i>01</i><i>02</i><i>03</i><i>04</i></div>
         <div class="pasos" id="pasosList">
           <div class="paso"><span class="n">01</span><b>Visita técnica</b><p>Recorres el terreno o la unidad con el arquitecto del proyecto. Sesenta minutos, sin costo.</p></div>
           <div class="paso"><span class="n">02</span><b>Carta de intención</b><p>Apartas con el 5% del valor. Reembolsable completo hasta la firma.</p></div>
@@ -1171,11 +1178,16 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
   <div class="inner">
     <div class="garantia part">
-      <div class="gcard" data-para="0.05"><b>10</b><span>años en estructura</span></div>
-      <div class="gcard" data-para="-0.07"><b>5</b><span>años en instalaciones ocultas</span></div>
-      <div class="gcard" data-para="0.06"><b>2</b><span>años en acabados</span></div>
+      <div class="gcard feat" data-para="0.05">
+        <span class="gn">01 · estructura</span>
+        <b>10</b>
+        <span>años de garantía en cimentación y estructura</span>
+        <span class="garrow" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M3 11 L11 3 M5 3 h6 v6"/></svg></span>
+      </div>
+      <div class="gcard" data-para="-0.06"><span class="gn">02 · instalaciones</span><b>5</b><span>años en impermeabilización e instalaciones ocultas</span></div>
+      <div class="gcard" data-para="0.06"><span class="gn">03 · acabados</span><b>2</b><span>años en acabados e instalaciones visibles</span></div>
+      <div class="gcard pie" data-para="-0.04"><span>La póliza de garantía se transfiere al siguiente propietario si vendes antes de que termine su vigencia.</span></div>
     </div>
-    <p class="garantiaPie part">La póliza de garantía se transfiere al siguiente propietario.</p>
   </div>
 </section>
 
@@ -1703,8 +1715,34 @@ porqueTick();
    --------------------------------------------------------------- */
 var procesoPin = document.getElementById('procesoPin');
 var pasoEls = [].slice.call(document.querySelectorAll('#pasosList .paso'));
-var dotEls = [].slice.call(document.querySelectorAll('#pasoDots i'));
-var arcoLado = document.querySelector('.arcoLado');
+var ringFill = document.getElementById('ringFill');
+var ringNodosGrupo = document.getElementById('ringNodos');
+var RING_R = 90, RING_C = 100, RING_CIRC = 2 * Math.PI * RING_R;
+var RING_ANGLES = [220, 193.333, 166.667, 140];
+function ringFrac(deg){ return (((270 - deg) % 360) + 360) % 360 / 360; }
+var ringNodeEls = [];
+(function buildRingNodos(){
+  if (!ringNodosGrupo) return;
+  var frag = document.createDocumentFragment();
+  RING_ANGLES.forEach(function(deg, i){
+    var rad = deg * Math.PI / 180;
+    var x = RING_C + RING_R * Math.cos(rad);
+    var y = RING_C + RING_R * Math.sin(rad);
+    var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    c.setAttribute('class', 'ringNodo'); c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 14);
+    var t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('class', 'ringTxt'); t.setAttribute('x', x); t.setAttribute('y', y);
+    t.textContent = '0' + (i + 1);
+    frag.appendChild(c); frag.appendChild(t);
+    ringNodeEls.push({ circle: c, text: t });
+  });
+  ringNodosGrupo.appendChild(frag);
+})();
+if (ringFill){
+  ringFill.style.strokeDasharray = RING_CIRC.toFixed(2);
+  ringFill.style.strokeDashoffset = RING_CIRC.toFixed(2);
+}
+var RING_F0 = ringFrac(RING_ANGLES[0]), RING_F1 = ringFrac(RING_ANGLES[RING_ANGLES.length - 1]);
 function procesoTick(){
   if (!procesoPin || !pasoEls.length) return;
   var r = procesoPin.getBoundingClientRect();
@@ -1713,8 +1751,14 @@ function procesoTick(){
   var idx = Math.min(pasoEls.length - 1, Math.floor(prog * pasoEls.length));
   if (prog <= 0) idx = 0;
   pasoEls.forEach(function(el, i){ el.classList.toggle('on', i === idx); });
-  dotEls.forEach(function(el, i){ el.classList.toggle('on', i === idx); });
-  if (arcoLado) arcoLado.style.setProperty('--rot', (prog * 230).toFixed(1) + 'deg');
+  ringNodeEls.forEach(function(n, i){
+    n.circle.classList.toggle('on', i === idx);
+    n.text.classList.toggle('on', i === idx);
+  });
+  if (ringFill){
+    var visFrac = RING_F0 + prog * (RING_F1 - RING_F0);
+    ringFill.style.strokeDashoffset = (RING_CIRC * (1 - visFrac)).toFixed(2);
+  }
 }
 addEventListener('scroll', procesoTick, { passive: true });
 addEventListener('resize', procesoTick);
@@ -1812,7 +1856,11 @@ if (form){
 function pinToFinalStates(){
   document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in','settled'); });
   if (pasoEls.length){ pasoEls[pasoEls.length - 1].classList.add('on'); }
-  if (dotEls.length){ dotEls[dotEls.length - 1].classList.add('on'); }
+  if (ringNodeEls.length){
+    var last = ringNodeEls[ringNodeEls.length - 1];
+    last.circle.classList.add('on'); last.text.classList.add('on');
+  }
+  if (ringFill) ringFill.style.strokeDashoffset = (RING_CIRC * (1 - RING_F1)).toFixed(2);
   if (holder){
     holdDone = true;
     holder.style.setProperty('--h','1');
