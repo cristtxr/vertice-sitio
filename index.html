@@ -1080,6 +1080,87 @@ footer .inner{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between
 @media (max-height:560px){.cue{display:none}}
 
 /* ---------- movimiento reducido, completo ---------- */
+/* sobre Vértice · escritura, imagen y lectura progresiva */
+.aboutType{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 .22em}
+.typedWord{display:inline-block;will-change:clip-path,transform}
+.typeCaret{display:inline-block;width:2px;height:.72em;margin-left:.04em;background:var(--accent);transform:translateY(.06em);opacity:0}
+body.motion-ready .sobre .typedWord{clip-path:inset(0 100% 0 0);transform:translateY(.08em)}
+body.motion-ready .sobre.story-on .typedWord{animation:typedReveal .76s steps(var(--chars),end) var(--word-delay,0s) both}
+body.motion-ready .sobre.story-on .typeCaret{animation:caretBlink .72s steps(1,end) .08s 3 both}
+@keyframes typedReveal{to{clip-path:inset(0);transform:none}}
+@keyframes caretBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+body.motion-ready .sobre .lede-line{display:block;clip-path:inset(0 0 100% 0);transform:translateY(20px)}
+body.motion-ready .sobre.story-on .lede-line{animation:aboutLineIn .72s var(--ease) var(--line-delay,.18s) both}
+body.motion-ready .sobre.story-on .lede-line:nth-child(2){--line-delay:.31s}
+body.motion-ready .sobre.story-on .lede-line:nth-child(3){--line-delay:.44s}
+body.motion-ready .sobre.story-on .lede-line:nth-child(4){--line-delay:.57s}
+@keyframes aboutLineIn{to{clip-path:inset(0);transform:none}}
+body.motion-ready .sobre .aboutCards img{opacity:0;transform:translate3d(-34px,52px,0) rotate(-7deg) scale(.9)}
+body.motion-ready .sobre .aboutCards img:nth-child(2){transform:translate3d(38px,68px,0) rotate(8deg) scale(.88)}
+body.motion-ready .sobre.story-on .aboutCards img{animation:aboutCardIn 1s var(--ease) .64s both}
+body.motion-ready .sobre.story-on .aboutCards img:nth-child(2){animation-delay:.78s}
+@keyframes aboutCardIn{to{opacity:1;transform:none}}
+body.motion-ready .sobre .aboutNotes p{opacity:0;clip-path:inset(0 0 100% 0);transform:translateY(24px)}
+body.motion-ready .sobre.story-on .aboutNotes p{animation:aboutNoteIn .78s var(--ease) .82s both}
+body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96s}
+@keyframes aboutNoteIn{to{opacity:1;clip-path:inset(0);transform:none}}
+
+/* por qué Vértice · una sola escena editorial */
+.porquePin{padding:10px 0;height:auto}
+.porque{margin:0 10px;padding:0;min-height:0;border-radius:var(--r-xl);background:#15120f}
+.porqueCanvas{position:relative;width:100%;height:clamp(720px,88svh,900px);min-height:720px;overflow:hidden;isolation:isolate;background:#b6a38f url("assets/obra-patio-1600.webp") center 48%/cover no-repeat}
+.porqueBackdrop,.porqueBackdrop img{position:absolute;inset:0;width:100%;height:100%}
+.porqueBackdrop img{object-fit:cover;object-position:center 48%;filter:saturate(.78) contrast(1.02) brightness(.91);transform:scale(1.015)}
+.porqueVeil{position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(13,11,10,.62) 0%,rgba(13,11,10,.15) 34%,transparent 58%),linear-gradient(0deg,rgba(13,11,10,.62) 0%,transparent 32%),linear-gradient(180deg,rgba(13,11,10,.22),transparent 26%)}
+.porqueEditorial{position:absolute;z-index:3;left:clamp(28px,5vw,76px);top:clamp(38px,7vh,72px);color:#fff;max-width:520px}
+.porqueEditorial>span{display:block;font-family:var(--display);font-weight:200;font-size:clamp(54px,7vw,108px);line-height:.75;letter-spacing:-.065em}
+.porqueEditorial h2{margin:0;font-family:var(--editorial);font-style:italic;font-weight:400;font-size:clamp(74px,10vw,154px);line-height:.82;letter-spacing:-.055em;color:var(--sun)}
+.porqueEditorial p{margin:25px 0 0;max-width:30ch;font-size:14px;line-height:1.55;color:rgba(255,255,255,.78);text-wrap:pretty}
+.razonesFlotantes{position:absolute;z-index:4;inset:0;pointer-events:none}
+.razon{--float-y:0px;position:absolute;width:clamp(224px,20vw,302px);padding:21px 23px 23px;background:rgba(250,247,242,.94);color:#221f1d;border:1px solid rgba(255,255,255,.62);border-radius:4px;box-shadow:0 24px 62px rgba(18,14,11,.2);backdrop-filter:blur(14px) saturate(.9);transform:translate3d(0,var(--float-y),0);will-change:transform;pointer-events:auto}
+.razon::before{content:"";position:absolute;left:0;top:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent 78%)}
+.razonN{display:block;margin-bottom:13px;font-size:9.5px;font-weight:650;letter-spacing:.14em;text-transform:uppercase;color:#826447}
+.razon b{display:block;font-family:var(--display);font-weight:350;font-size:clamp(19px,1.7vw,25px);line-height:1.05;letter-spacing:-.03em}
+.razon p{margin:10px 0 0;font-size:12.5px;line-height:1.52;color:#625c57;text-wrap:pretty}
+.razonDark{background:rgba(24,21,19,.87);border-color:rgba(255,255,255,.16);color:#fff}
+.razonDark .razonN{color:var(--sun)}.razonDark p{color:rgba(255,255,255,.68)}
+.razon1{left:43%;top:8%}.razon2{right:4.2%;top:29%}.razon3{left:7%;bottom:11%}.razon4{right:19%;bottom:13%}
+.porqueAction{position:absolute;z-index:5;right:clamp(24px,4vw,60px);bottom:clamp(22px,4vh,38px);display:flex;align-items:center;gap:13px;color:#fff;text-decoration:none;font-size:11px;letter-spacing:.11em;text-transform:uppercase}
+.porqueAction span{padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,.46)}
+.porqueAction b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent);font-size:15px;transition:transform .4s var(--ease)}
+.porqueAction:hover b{transform:rotate(45deg)}
+@media (max-width:900px){.razon1{left:48%;top:10%}.razon4{right:8%;bottom:9%}}
+@media (max-width:700px){
+  .porque{margin:0 6px;border-radius:var(--r-lg)}
+  .porqueCanvas{height:auto;min-height:1120px}
+  .porqueBackdrop img{object-position:57% center;filter:saturate(.72) contrast(1.02) brightness(.78)}
+  .porqueVeil{background:linear-gradient(180deg,rgba(12,10,9,.58),rgba(12,10,9,.1) 25%,rgba(12,10,9,.48) 58%,rgba(12,10,9,.82))}
+  .porqueEditorial{left:22px;right:22px;top:102px}.porqueEditorial>span{font-size:clamp(50px,16vw,67px)}
+  .porqueEditorial h2{font-size:clamp(76px,24vw,104px)}.porqueEditorial p{margin-top:16px;font-size:13px;max-width:28ch}
+  .razonesFlotantes{inset:350px 18px 92px;display:grid;grid-template-columns:1fr;gap:10px;align-content:end}
+  .razon,.razon1,.razon2,.razon3,.razon4{position:relative;inset:auto;width:100%;padding:18px 19px 19px;transform:translate3d(0,var(--float-y),0)}
+  .razon p{font-size:12px;line-height:1.47}.razonN{margin-bottom:9px}.razon b{font-size:20px}
+  .porqueAction{left:19px;right:auto;bottom:25px}
+}
+
+/* círculo · tipografía coherente y encuadre completo */
+.procesoStage{--orbit-size:min(46vw,650px,calc(100svh - 150px))}
+.proceso .pasos{min-height:min(400px,50svh)}
+.proceso .paso h3{font-family:var(--display);font-weight:200;letter-spacing:-.06em;line-height:.9}
+.orbitIndex{font-family:var(--display);font-weight:200}
+@media (min-width:761px) and (max-height:760px){
+  .procesoStage{--orbit-size:min(40vw,calc(100svh - 116px),520px);grid-template-columns:minmax(320px,.92fr) minmax(360px,1.08fr);gap:clamp(22px,3.5vw,52px);padding:74px max(30px,calc((100vw - 1220px)/2)) 22px}
+  .proceso .pasos{min-height:min(254px,51svh)}.pasoTop{margin-bottom:12px}
+  .proceso .paso h3{max-width:11ch;font-size:clamp(38px,4.35vw,58px);line-height:.88}
+  .proceso .paso p{margin-top:13px;font-size:13px;line-height:1.46;max-width:46ch}
+  .pasoProof{margin-top:11px;font-size:9px}.procesoCta{margin-top:12px;font-size:11.5px}
+  .orbitIndex{font-size:clamp(68px,8vw,108px)}.orbitNode{width:48px;height:48px}.procesoHint{display:none}
+}
+
+/* garantías · mazo reversible que se abre al entrar */
+.garantia{perspective:1400px;isolation:isolate}
+.garantia .gcard{will-change:transform;transform-origin:center;transition:transform .34s var(--ease-soft),box-shadow .42s var(--ease-soft),translate .42s var(--ease)}
+
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{
@@ -1102,6 +1183,9 @@ footer .inner{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between
   .proceso .paso h3{font-size:clamp(38px,4vw,58px)}
   .procesoCta{margin-top:56px}
   .gcard,.cifras-row div,.arcoLado{transform:none !important}
+  .typedWord,.lede-line,.aboutCards img,.aboutNotes p{clip-path:none !important;opacity:1 !important;transform:none !important}
+  .typeCaret{display:none}
+  .razon{--float-y:0px !important}
 }
 @media (prefers-reduced-motion:reduce) and (max-width:760px){
   .procesoStage{padding:88px 20px 44px}
@@ -1195,13 +1279,13 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 <!-- ============ 02 SOBRE VÉRTICE ============ -->
 <section class="section sobre reveal" id="sobre">
   <div class="inner">
-    <div class="sechead part">
-      <h2 class="big">sobre <em>vértice</em></h2>
+    <div class="sechead sobreHead">
+      <h2 class="big aboutType" aria-label="sobre vértice"><span class="typedWord" style="--chars:5">sobre</span> <em class="typedWord" style="--chars:7;--word-delay:.58s">vértice</em><span class="typeCaret" aria-hidden="true"></span></h2>
       <span class="tag">desarrolladora · residencial premium</span>
       <div class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.4 9.1 L20 6.3 L15.6 12 L20 17.7 L13.4 14.9 L12 22 L10.6 14.9 L4 17.7 L8.4 12 L4 6.3 L10.6 9.1 Z"/></svg></div>
     </div>
 
-    <p class="lede part">
+    <p class="lede">
       <span class="lede-line"><span class="tint">Desarrollamos residencias contemporáneas</span></span>
       <span class="lede-line">donde arquitectura, luz y <img class="chip-img" src="assets/obra-umbral-400.webp" width="400" height="226" alt="" aria-hidden="true" loading="lazy" decoding="async"> paisaje existen en</span>
       <span class="lede-line"><span class="tint">equilibrio.</span> No solo construimos casas <img class="chip-img" src="assets/obra-patio-400.webp" width="400" height="226" alt="" aria-hidden="true" loading="lazy" decoding="async">:</span>
@@ -1209,7 +1293,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </p>
 
     <div class="grid">
-      <div class="duo part">
+      <div class="duo aboutCards">
         <img src="assets/obra-ladera-400.webp"
              srcset="assets/obra-ladera-400.webp 400w, assets/obra-ladera-900.webp 900w"
              sizes="(max-width: 640px) 44vw, 330px"
@@ -1220,7 +1304,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
              alt="Casa Corte frente al horizonte de Careyes." loading="lazy" decoding="async" width="1920" height="1084">
       </div>
 
-      <div class="notas part">
+      <div class="notas aboutNotes">
         <p>Financiamiento directo hasta 36 meses sin intereses sobre el 40% del valor, y convenio con tres bancos con preautorización en 72 horas.</p>
         <p>Diez años de garantía en estructura, cinco en impermeabilización e instalaciones ocultas y dos en acabados. La póliza se transfiere al siguiente propietario.</p>
       </div>
@@ -1412,29 +1496,32 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 <!-- ============ 05 POR QUÉ VÉRTICE ============ -->
 <section class="section porquePin" id="porquePin">
  <div class="porque" id="porque">
-  <div class="inner phead">
-    <h2 class="big">por qué<br><span class="tint">vértice</span></h2>
-    <span class="tag">cuatro razones, cuatro casas · desliza</span>
-  </div>
-  <div class="pistaWrap">
-    <div class="pista" id="pista">
-      <article class="casaCard">
-        <img src="assets/obra-ladera-900.webp" srcset="assets/obra-ladera-400.webp 400w, assets/obra-ladera-900.webp 900w, assets/obra-ladera-1600.webp 1600w" sizes="(max-width:700px) 86vw, 40vw" alt="Casa Ladera" loading="lazy" decoding="async" width="1920" height="1084">
-        <div class="tcara"><span class="lg">casa ladera</span><b>Precio cerrado</b><p>El precio de la carta de intención es el precio de la escritura. Sin ajustes por obra ni por inflación de materiales.</p></div>
+  <div class="porqueCanvas" id="pista">
+    <picture class="porqueBackdrop">
+      <source media="(max-width:700px)" srcset="assets/obra-patio-900.webp">
+      <img src="assets/obra-patio-1600.webp" alt="Casa Patio, una residencia Vértice alrededor de una jacaranda" loading="eager" fetchpriority="low" decoding="async" width="1920" height="1084">
+    </picture>
+    <div class="porqueVeil" aria-hidden="true"></div>
+    <header class="porqueEditorial">
+      <span>por qué</span>
+      <h2>vértice</h2>
+      <p>Cuatro certezas para comprar una casa sin depender de promesas.</p>
+    </header>
+    <div class="razonesFlotantes" aria-label="Cuatro razones para elegir Vértice">
+      <article class="razon razon1" data-depth="-.30">
+        <span class="razonN">01 · valor</span><b>Precio cerrado</b><p>El precio de la carta de intención es el de la escritura. Sin ajustes por obra o inflación de materiales.</p>
       </article>
-      <article class="casaCard">
-        <img src="assets/obra-niebla-900.webp" srcset="assets/obra-niebla-400.webp 400w, assets/obra-niebla-900.webp 900w, assets/obra-niebla-1600.webp 1600w" sizes="(max-width:700px) 86vw, 40vw" alt="Casa Niebla" loading="lazy" decoding="async" width="1920" height="1084">
-        <div class="tcara"><span class="lg">casa niebla</span><b>Fecha por contrato</b><p>Si entregamos tarde, la penalización corre a nuestro cargo y está escrita en la compraventa. No es una promesa verbal.</p></div>
+      <article class="razon razon2 razonDark" data-depth=".22">
+        <span class="razonN">02 · plazo</span><b>Fecha por contrato</b><p>Si entregamos tarde, la penalización corre a nuestro cargo y queda escrita en la compraventa.</p>
       </article>
-      <article class="casaCard">
-        <img src="assets/obra-corte-900.webp" srcset="assets/obra-corte-400.webp 400w, assets/obra-corte-900.webp 900w, assets/obra-corte-1600.webp 1600w" sizes="(max-width:700px) 86vw, 40vw" alt="Casa Corte" loading="lazy" decoding="async" width="1920" height="1084">
-        <div class="tcara"><span class="lg">casa corte</span><b>Apartado reembolsable</b><p>Apartas con el 5% del valor. Si te arrepientes antes de la escritura, se devuelve completo.</p></div>
+      <article class="razon razon3" data-depth=".28">
+        <span class="razonN">03 · libertad</span><b>Apartado reembolsable</b><p>Apartas con el 5%. Si no continúas antes de firmar, recibes el importe completo.</p>
       </article>
-      <article class="casaCard">
-        <img src="assets/obra-patio-900.webp" srcset="assets/obra-patio-400.webp 400w, assets/obra-patio-900.webp 900w, assets/obra-patio-1600.webp 1600w" sizes="(max-width:700px) 86vw, 40vw" alt="Casa Patio" loading="lazy" decoding="async" width="1920" height="1084">
-        <div class="tcara"><span class="lg">casa patio</span><b>Garantía transferible</b><p>Diez años en estructura y cinco en instalaciones ocultas. La póliza pasa al siguiente propietario si vendes.</p></div>
+      <article class="razon razon4" data-depth="-.20">
+        <span class="razonN">04 · respaldo</span><b>Garantía transferible</b><p>Diez años en estructura y cinco en instalaciones ocultas. La póliza acompaña a la propiedad.</p>
       </article>
     </div>
+    <a class="porqueAction" href="#obras"><span>Explorar las seis residencias</span><b aria-hidden="true">↗</b></a>
   </div>
  </div>
 </section>
@@ -1559,16 +1646,16 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <p>Tres coberturas con plazos distintos, documentadas en una sola póliza. Sin letras pequeñas y sin perder vigencia si la propiedad cambia de manos.</p>
       </div>
     </div>
-    <div class="garantia part">
-      <div class="gcard feat" data-mark="10" data-para="0.05">
+    <div class="garantia" id="garantiaDeck">
+      <div class="gcard feat" data-mark="10">
         <span class="gn">01 · estructura</span>
         <b>10</b>
         <span>años de garantía en cimentación y estructura</span>
         <span class="garrow" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M3 11 L11 3 M5 3 h6 v6"/></svg></span>
       </div>
-      <div class="gcard" data-mark="05" data-para="-0.06"><span class="gn">02 · instalaciones</span><b>5</b><span>años en impermeabilización e instalaciones ocultas</span></div>
-      <div class="gcard" data-mark="02" data-para="0.06"><span class="gn">03 · acabados</span><b>2</b><span>años en acabados e instalaciones visibles</span></div>
-      <div class="gcard pie" data-mark="↗" data-para="-0.04"><span>La póliza se transfiere al siguiente propietario si vendes antes de que termine su vigencia.</span></div>
+      <div class="gcard" data-mark="05"><span class="gn">02 · instalaciones</span><b>5</b><span>años en impermeabilización e instalaciones ocultas</span></div>
+      <div class="gcard" data-mark="02"><span class="gn">03 · acabados</span><b>2</b><span>años en acabados e instalaciones visibles</span></div>
+      <div class="gcard pie" data-mark="↗"><span>La póliza se transfiere al siguiente propietario si vendes antes de que termine su vigencia.</span></div>
     </div>
   </div>
 </section>
@@ -1965,6 +2052,20 @@ if ('IntersectionObserver' in window){
 
 }
 
+/* La presentación de Vértice se vuelve a escribir al regresar a la sección. */
+var sobreStory = document.getElementById('sobre');
+document.body.classList.add('motion-ready');
+function sobreTick(){
+  if (!sobreStory) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches){ sobreStory.classList.add('story-on'); return; }
+  var r = sobreStory.getBoundingClientRect();
+  var active = r.top < innerHeight * .82 && r.bottom > innerHeight * .14;
+  sobreStory.classList.toggle('story-on', active);
+}
+addEventListener('scroll',sobreTick,{ passive:true });
+addEventListener('resize',sobreTick);
+sobreTick();
+
 /* ---------------------------------------------------------------
    8 · la luz entra por scroll, y con ella los datos
    --------------------------------------------------------------- */
@@ -2019,17 +2120,17 @@ revelaTick();
    --------------------------------------------------------------- */
 var porquePin = document.getElementById('porquePin');
 var pista = document.getElementById('pista');
-var porqueCards = pista ? [].slice.call(pista.querySelectorAll('.casaCard')) : [];
+var porqueCards = pista ? [].slice.call(pista.querySelectorAll('.razon')) : [];
 function porqueTick(){
   if (!porquePin || !pista) return;
   var r = porquePin.getBoundingClientRect();
-  /* Parallax editorial: cada tarjeta respira a una velocidad distinta,
-     sin desplazar la cuadrícula ni quitar contenido de pantalla. */
+  /* Las anotaciones respiran dentro de la fotografía, sin abandonar
+     su sitio ni competir con la lectura. */
   var center = innerHeight * .5;
-  var progress = clamp((center - (r.top + r.height * .12)) / (r.height * .76), -1, 1);
-  porqueCards.forEach(function(card, i){
-    var depth = (i % 2 ? -.72 : .72) * (1 + (i % 3) * .12);
-    card.style.transform = 'translate3d(0,' + (progress * depth * 22).toFixed(1) + 'px,0)';
+  var progress = clamp((center - (r.top + r.height * .5)) / Math.max(r.height,.01), -.7, .7);
+  porqueCards.forEach(function(card){
+    var depth = parseFloat(card.dataset.depth) || 0;
+    card.style.setProperty('--float-y',(progress * depth * 72).toFixed(1) + 'px');
   });
 }
 addEventListener('scroll', porqueTick, { passive: true });
@@ -2100,7 +2201,55 @@ addEventListener('resize', parallaxTick);
 parallaxTick();
 
 /* ---------------------------------------------------------------
-   8e · quienes ya viven ahí · las fotos de las casas van rotando solas
+   8e · garantías · agrupación reversible al entrar y salir
+   --------------------------------------------------------------- */
+var garantiaDeck = document.getElementById('garantiaDeck');
+var garantiaCards = garantiaDeck ? [].slice.call(garantiaDeck.querySelectorAll('.gcard')) : [];
+var garantiaOffsets = [];
+function measureGarantia(){
+  if (!garantiaDeck || !garantiaCards.length) return;
+  var saved = garantiaCards.map(function(card){
+    var value = { transform:card.style.transform, transition:card.style.transition };
+    card.style.transition = 'none';
+    card.style.transform = 'none';
+    return value;
+  });
+  void garantiaDeck.offsetWidth;
+  var dr = garantiaDeck.getBoundingClientRect();
+  var cx = dr.left + dr.width / 2, cy = dr.top + dr.height / 2;
+  garantiaOffsets = garantiaCards.map(function(card,i){
+    var r = card.getBoundingClientRect();
+    return { x:cx - (r.left + r.width / 2), y:cy - (r.top + r.height / 2), rot:[-8,6,-4,8][i] };
+  });
+  garantiaCards.forEach(function(card,i){
+    card.style.transition = saved[i].transition;
+    card.style.transform = saved[i].transform;
+  });
+}
+function garantiaTick(){
+  if (!garantiaDeck || !garantiaCards.length) return;
+  if (REDUCE_MOTION){ garantiaCards.forEach(function(card){ card.style.transform = 'none'; }); return; }
+  var r = garantiaDeck.getBoundingClientRect();
+  var enter = clamp((innerHeight - r.top) / (innerHeight * .92),0,1);
+  var leave = clamp(r.bottom / (innerHeight * .35),0,1);
+  var spread = Math.min(enter,leave);
+  spread = spread * spread * (3 - 2 * spread);
+  var fold = 1 - spread;
+  garantiaCards.forEach(function(card,i){
+    var o = garantiaOffsets[i] || {x:0,y:0,rot:0};
+    var scale = .84 + spread * .16;
+    card.style.zIndex = String(garantiaCards.length - i);
+    card.style.transform = 'translate3d(' + (o.x * fold).toFixed(1) + 'px,' + (o.y * fold).toFixed(1) + 'px,' + ((garantiaCards.length-i)*fold*3).toFixed(1) + 'px) rotate(' + (o.rot * fold).toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
+  });
+}
+function resizeGarantia(){ measureGarantia(); garantiaTick(); }
+measureGarantia();
+addEventListener('scroll',garantiaTick,{ passive:true });
+addEventListener('resize',resizeGarantia);
+garantiaTick();
+
+/* ---------------------------------------------------------------
+   8f · quienes ya viven ahí · las fotos de las casas van rotando solas
    --------------------------------------------------------------- */
 (function pruebaCiclo(){
   var fotos = [].slice.call(document.querySelectorAll('.pf'));
