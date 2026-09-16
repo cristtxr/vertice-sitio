@@ -1,3 +1,8 @@
 .vercel
 .serve-out.log
 .serve-err.log
+
+# Fuentes visuales locales; la web publica sus derivados optimizados en /assets.
+imagen hero.png
+imagenedificio.jpg
+refrencia para la seccion sobre vertice.png
