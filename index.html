@@ -20,15 +20,14 @@
 <meta name="twitter:description" content="Tres residencias de autor con galería, plano y visita privada.">
 <meta name="twitter:image" content="https://vertice-opal.vercel.app/assets/hero-torre-1672.webp">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23232120'/%3E%3Cpath d='M9 9 L16 23 L23 9' fill='none' stroke='%23B98E62' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/hero-torre-1672.webp" media="(min-width:701px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-torre-mobile.webp" media="(max-width:700px)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/casa-palmar-exterior-900.webp" imagesrcset="assets/casa-palmar-exterior-400.webp 400w, assets/casa-palmar-exterior-900.webp 900w" imagesizes="(max-width:700px) 88vw, 430px">
-<link rel="preload" as="image" href="assets/casa-mirador-exterior-900.webp" imagesrcset="assets/casa-mirador-exterior-400.webp 400w, assets/casa-mirador-exterior-900.webp 900w" imagesizes="(max-width:700px) 88vw, 430px">
-<link rel="preload" as="image" href="assets/obra-corte-900.webp" imagesrcset="assets/obra-corte-400.webp 400w, assets/obra-corte-900.webp 900w" imagesizes="(max-width:700px) 88vw, 430px">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@200;300;400;500&display=swap">
+<link rel="preload" as="font" href="assets/outfit-latin.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="assets/instrument-serif-latin.woff2" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Outfit";font-style:normal;font-weight:200 500;font-display:swap;src:url("assets/outfit-latin.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;src:url("assets/instrument-serif-latin.woff2") format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url("assets/instrument-serif-italic-latin.woff2") format("woff2")}
 /* =====================================================================
    VÉRTICE · fichas
    Display: Outfit 200/300, en minúsculas y con interletrado negativo.
@@ -159,7 +158,7 @@ button{font:inherit;color:inherit}
 /* =====================================================================
    HERO · fotografía vertical recorrida por scroll
    ================================================================== */
-.hero{position:relative;height:420vh;z-index:1}
+.hero{position:relative;height:260vh;z-index:1}
 .stage{
   position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
   background:#100E0D;
@@ -176,8 +175,8 @@ button{font:inherit;color:inherit}
 .scrim{
   position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
-    linear-gradient(to right,rgba(10,8,7,.045) 0%,rgba(10,8,7,.018) 34%,rgba(10,8,7,0) 68%),
-    linear-gradient(to bottom,rgba(10,8,7,.015) 0%,rgba(10,8,7,0) 58%,rgba(10,8,7,.045) 100%);
+    linear-gradient(to right,rgba(9,8,7,.62) 0%,rgba(9,8,7,.28) 46%,rgba(9,8,7,.08) 78%),
+    linear-gradient(to bottom,rgba(9,8,7,.28) 0%,rgba(9,8,7,.02) 46%,rgba(9,8,7,.48) 100%);
 }
 
 .cue{
@@ -196,12 +195,12 @@ button{font:inherit;color:inherit}
 .band{
   position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
   padding:0 var(--gutter);opacity:0;pointer-events:none;
-  color:#241B15;text-shadow:0 1px 0 rgba(255,255,255,.8),0 4px 18px rgba(255,255,255,.22);
+  color:#fff;text-shadow:0 4px 24px rgba(0,0,0,.48);
 }
 .band::before{
   content:"";position:absolute;inset:-4%;pointer-events:none;
-  opacity:calc(.08 + .22*var(--k,1));
-  background:radial-gradient(ellipse 62% 74% at 27% 50%,rgba(255,251,243,.56) 0%,rgba(255,251,243,.2) 46%,rgba(255,251,243,0) 80%);
+  opacity:1;
+  background:linear-gradient(90deg,rgba(8,7,6,.46) 0%,rgba(8,7,6,.18) 38%,transparent 68%);
 }
 .band > *{position:relative;z-index:1}
 .band .kicker{
@@ -213,7 +212,7 @@ button{font:inherit;color:inherit}
   font-size:clamp(40px,7.4vw,112px);line-height:.9;letter-spacing:-.045em;
   max-width:15ch;margin:0;
 }
-.band .sub{font-size:clamp(16px,1.3vw,20px);max-width:46ch;margin:26px 0 0;color:rgba(36,27,21,.9);text-shadow:0 1px 0 rgba(255,255,255,.8)}
+.band .sub{font-size:clamp(16px,1.3vw,20px);max-width:46ch;margin:26px 0 0;color:rgba(255,255,255,.9);text-shadow:0 3px 18px rgba(0,0,0,.46)}
 .ctarow{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;align-items:center}
 .band .pill{text-shadow:none}
 
@@ -223,19 +222,12 @@ button{font:inherit;color:inherit}
 .c{display:inline-block;will-change:transform,opacity}
 
 /* (f) deriva hacia abajo · banda 1 */
-.b1 .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.8,1);opacity:var(--kc);
-  transform:translateY(calc((1 - var(--kc)) * -30px))}
+.b1 .w{opacity:1;transform:none}
 /* (a) dispersión por carácter · banda 2 */
-.b2 .c{--kc:clamp(0,(var(--k,0) - var(--th,0))*2.6,1);opacity:var(--kc);
-  transform:translate(calc((1 - var(--kc))*var(--jx,0px)),calc((1 - var(--kc))*var(--jy,0px)))
-            rotate(calc((1 - var(--kc))*var(--jr,0deg)))}
+.b2 .w,.b2 .c{opacity:1;transform:none}
 /* (e) ascenso en tres llegadas · banda 3 */
-.b3 .w{--kc:clamp(0,(var(--k,0) - var(--th,0))*3,1);opacity:var(--kc);
-  transform:translateY(calc((1 - var(--kc)) * 24px))}
-.b3 .sub{--ks:clamp(0,(var(--k,0) - .62)*4,1);opacity:var(--ks);
-  transform:translateY(calc((1 - var(--ks)) * 16px))}
-.b3 .ctarow{--kb:clamp(0,(var(--k,0) - .76)*5,1);opacity:var(--kb);
-  transform:translateY(calc((1 - var(--kb)) * 16px))}
+.b3 .w{opacity:1;transform:none}
+.b3 .sub,.b3 .ctarow{opacity:1;transform:none}
 
 /* tarjetas de vidrio con las cifras, flotando sobre la foto */
 .floaters{
@@ -1053,17 +1045,17 @@ footer .inner{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between
    ser un degradado anclado abajo, y el recorrido se acorta porque el pulgar recorre
    menos que una rueda de ratón. */
 @media (max-width:900px){
-  .hero{height:360vh}
+  .hero{height:220vh}
   .scrim{
     background:
-      linear-gradient(to top,rgba(8,6,5,.16) 0%,rgba(8,6,5,.055) 34%,rgba(8,6,5,0) 70%),
-      linear-gradient(to right,rgba(8,6,5,.045),rgba(8,6,5,0) 70%);
+      linear-gradient(to top,rgba(8,6,5,.74) 0%,rgba(8,6,5,.35) 42%,rgba(8,6,5,.08) 78%),
+      linear-gradient(to right,rgba(8,6,5,.42),rgba(8,6,5,.04) 78%);
   }
   .band{justify-content:flex-end;padding:0 var(--gutter) clamp(76px,15vh,140px)}
   .band::before,.b3::before{
     inset:0;
     background:linear-gradient(to top,
-      rgba(255,251,243,.42) 0%,rgba(255,251,243,.22) 24%,rgba(255,251,243,.08) 56%,rgba(255,251,243,0) 84%);
+      rgba(8,6,5,.68) 0%,rgba(8,6,5,.26) 46%,rgba(8,6,5,0) 84%);
   }
   .heroImage{object-position:49% 50%}
   .band h1,.band h2{font-size:clamp(33px,9vw,50px);line-height:1;max-width:14ch}
@@ -1243,9 +1235,9 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
   .orbitIndex{font-size:clamp(68px,8vw,108px)}.orbitNode{width:48px;height:48px}.procesoHint{display:none}
 }
 
-/* garantías · mazo reversible que se abre al entrar */
-.garantia{perspective:1400px;isolation:isolate}
-.garantia .gcard{will-change:transform;transform-origin:center;transition:transform .34s var(--ease-soft),box-shadow .42s var(--ease-soft),translate .42s var(--ease)}
+/* garantías · composición estable para leer y comparar sin distracciones */
+.garantia{isolation:isolate}
+.garantia .gcard{will-change:auto;transform:none!important;transition:box-shadow .38s var(--ease-soft),translate .38s var(--ease-soft)}
 
 /* =====================================================================
    REENCUADRE EDITORIAL · tres casas, razones, equipo y proceso en cards
@@ -1285,13 +1277,13 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
 .porqueTitle>p{margin:24px 0 0;max-width:60ch;font-size:15px;line-height:1.6;color:var(--ink-soft)}
 .porqueRail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:clamp(34px,5vh,58px)}
 .porqueCard{position:relative;min-height:clamp(330px,31vw,450px);overflow:hidden;border-radius:14px;background:#DCD8D1;color:#fff}
-.porqueCard>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.03);transition:transform 1.15s var(--ease),filter .8s var(--ease-soft)}
+.porqueCard>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.03);transition:filter .45s var(--ease-soft)}
 .porqueCard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,10,8,.02) 24%,rgba(12,10,8,.82) 100%)}
 .porqueCard>div{position:absolute;z-index:2;inset:auto 0 0;padding:22px}
 .porqueCard span{display:block;font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.7)}
 .porqueCard h3{margin:9px 0 0;font-family:var(--display);font-size:clamp(21px,1.9vw,28px);font-weight:350;line-height:1;letter-spacing:-.035em}
 .porqueCard p{margin:10px 0 0;font-size:12px;line-height:1.5;color:rgba(255,255,255,.72)}
-.porqueCard:hover>img{transform:scale(1.045);filter:saturate(.96) contrast(1.02)}
+.porqueCard:hover>img{filter:saturate(.96) contrast(1.02)}
 .porqueCardText{background:var(--dark);color:#fff}
 .porqueCardText::before{content:"V";position:absolute;right:-.08em;top:-.18em;font-family:var(--display);font-size:280px;font-weight:200;line-height:1;color:rgba(255,255,255,.035)}
 .porqueCardText::after{background:radial-gradient(circle at 82% 18%,rgba(185,142,98,.2),transparent 43%)}
@@ -1312,10 +1304,10 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
 .equipo{margin:0 10px;padding:clamp(90px,12vh,150px) 0;background:#11100F;color:#F7F4EF;border-radius:var(--r-xl);overflow:hidden}
 .equipoGrid{display:grid;grid-template-columns:1.42fr .58fr;gap:clamp(40px,7vw,108px);align-items:center}
 .equipoPeople{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.3vw,18px);align-items:end}
-.equipoPerson{margin:0;min-width:0}.equipoPerson:nth-child(2){transform:translateY(34px)}
-.equipoPerson img{width:100%;height:clamp(280px,31vw,430px);object-fit:cover;object-position:center 28%;border-radius:14px;filter:saturate(.72) contrast(1.04);transition:filter .55s var(--ease-soft),transform .7s var(--ease)}
-.equipoPerson:hover img{filter:saturate(.98) contrast(1.02);transform:translateY(-7px)}
-.equipoPerson figcaption{padding:14px 3px 0}.equipoPerson figcaption b{display:block;font-size:12px;font-weight:500}.equipoPerson figcaption span{display:block;margin-top:3px;font-size:10px;color:rgba(247,244,239,.5)}
+.equipoPerson{margin:0;min-width:0}.equipoPerson:nth-child(2){transform:translateY(26px)}
+.equipoPerson img{width:100%;height:clamp(310px,34vw,470px);object-fit:cover;object-position:center 22%;border-radius:14px;filter:saturate(.78) contrast(1.03);transition:filter .4s var(--ease-soft)}
+.equipoPerson:hover img{filter:saturate(.96) contrast(1.02)}
+.equipoPerson figcaption{padding:18px 3px 0}.equipoPerson figcaption b{display:block;font-size:clamp(15px,1.25vw,18px);line-height:1.2;font-weight:500;letter-spacing:-.015em}.equipoPerson figcaption span{display:block;margin-top:7px;font-size:clamp(12px,1vw,14px);line-height:1.35;color:rgba(247,244,239,.68)}
 .equipoCopy>span{color:rgba(247,244,239,.48)}
 .equipoCopy h2{margin:20px 0 0;font-family:var(--display);font-size:clamp(40px,4.6vw,68px);font-weight:250;line-height:.9;letter-spacing:-.055em;text-wrap:balance}
 .equipoCopy p{margin:28px 0 0;max-width:42ch;font-size:14px;line-height:1.65;color:rgba(247,244,239,.64)}
@@ -1327,26 +1319,31 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
 .proceso{padding-top:clamp(92px,14vh,180px)}
 .proceso .sechead{margin-bottom:clamp(60px,9vh,108px)}
 .procesoCards{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(14px,1.8vw,24px);align-items:stretch}
-.procesoCard{position:relative;min-height:clamp(540px,61vw,780px);overflow:hidden;border-radius:18px;background:var(--dark);color:#fff;transform:translateZ(0)}
+.procesoCard{position:relative;min-height:clamp(540px,61vw,780px);overflow:hidden;border-radius:18px;background:var(--dark);color:#fff;transform:none}
 .procesoCardWide{min-height:clamp(620px,68vw,880px)}
 .procesoCard:nth-child(2){margin-top:clamp(80px,12vw,170px)}
 .procesoCard:nth-child(3){margin-top:clamp(-80px,-6vw,-40px)}
 .procesoCardLast{margin-top:clamp(30px,7vw,110px)}
-.procesoCard>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.76) contrast(1.04);transition:transform 1.2s var(--ease),filter .8s var(--ease-soft)}
+.procesoCard>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.8) contrast(1.04);transition:filter .45s var(--ease-soft)}
 .procesoCard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,7,.02) 34%,rgba(10,8,7,.88) 100%)}
 .procesoCardCopy{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:clamp(24px,3.2vw,46px)}
 .procesoCardCopy>span{display:block;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--sun)}
 .procesoCardCopy h3{margin:16px 0 0;max-width:13ch;font-family:var(--display);font-size:clamp(34px,4vw,60px);font-weight:250;line-height:.9;letter-spacing:-.055em;text-wrap:balance}
 .procesoCardCopy p{margin:20px 0 0;max-width:46ch;font-size:14px;line-height:1.6;color:rgba(255,255,255,.7)}
 .procesoCardCopy>b{display:inline-block;margin-top:18px;padding-top:12px;border-top:1px solid rgba(255,255,255,.24);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff}
-.procesoCard:hover>img{transform:scale(1.035);filter:saturate(.96) contrast(1.02)}
+.procesoCard:hover>img{filter:saturate(.94) contrast(1.02)}
 .procesoCardsCta{display:flex;align-items:center;justify-content:space-between;width:min(100%,520px);margin:clamp(44px,7vh,82px) 0 0 auto;padding:17px 0;border-top:1px solid rgba(35,33,32,.28);border-bottom:1px solid rgba(35,33,32,.28);font-family:var(--display);font-size:clamp(22px,2.5vw,34px);font-weight:300;letter-spacing:-.035em;text-decoration:none}
 .procesoCardsCta span{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--sans);font-size:16px;transition:transform .45s var(--ease)}
 .procesoCardsCta:hover span{transform:rotate(45deg)}
-@keyframes procesoCardReveal{from{transform:translate3d(0,64px,0) scale(.985)}to{transform:translate3d(0,0,0) scale(1)}}
-@supports (animation-timeline:view()){
-  .procesoCard{animation:procesoCardReveal both linear;animation-timeline:view();animation-range:entry 4% cover 36%}
+
+/* párrafos · palabras que llegan desde un pequeño desorden y se asientan */
+.scatterCopy .scatterWord{
+  display:inline-block;will-change:transform,opacity;
+  opacity:.38;transform:translate3d(var(--scatter-x),var(--scatter-y),0) rotate(var(--scatter-r));
+  transition:transform .78s var(--ease),opacity .62s var(--ease-soft);
+  transition-delay:var(--scatter-delay)
 }
+.scatterCopy.scatterIn .scatterWord{opacity:1;transform:none}
 
 /* ficha vertical · exterior, información, galería, relato, plano y agenda */
 .panelficha{background:#141311}
@@ -1387,6 +1384,11 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
 .fichaPlanoWrap{padding:clamp(54px,8vh,92px) 0;border-top:1px solid rgba(255,255,255,.12)}
 .fichaPlanoGrid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(32px,6vw,90px);align-items:center;margin-top:28px}
 .fichaPlanoGrid .planoCaja{min-height:520px;background:#1D1B18}.fichaPlanoGrid .plano{min-height:360px}
+.planoCaja.planoImagenCaja{background:#F4F1EC;border-color:rgba(255,255,255,.16);color:var(--ink)}
+.planoMedia{display:flex;align-items:center;justify-content:center;flex:1 1 auto;min-height:360px}
+.planoImagen{display:block;width:100%;height:auto;max-height:440px;object-fit:contain;border-radius:10px;background:#F4F1EC}
+.planoImagenCaja .notaPunto{margin-bottom:0;border-color:rgba(35,33,32,.14);color:var(--ink-soft)}
+.planoImagenCaja .notaPunto b{color:var(--ink)}
 .fichaPlanoAside h4{margin:0;font-family:var(--display);font-size:clamp(28px,3.5vw,46px);font-weight:250;line-height:.95;letter-spacing:-.045em}
 .fichaPlanoAside p{margin:22px 0 0;font-size:14px;line-height:1.65;color:rgba(245,241,236,.62)}
 .fichaAgenda{margin-top:clamp(70px,10vh,120px);padding:clamp(42px,6vw,74px);border-radius:18px;background:#F4F1EC;color:var(--ink);display:flex;align-items:end;justify-content:space-between;gap:32px}
@@ -1402,6 +1404,10 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
   .porqueProof{grid-template-columns:1fr;gap:54px}.porqueProof figure img{height:min(760px,96vw)}
   .equipoGrid{grid-template-columns:1fr;gap:84px}.equipoCopy{max-width:620px}.equipoPeople{order:2}
   .fichaPlanoGrid{grid-template-columns:1fr}.fichaPlanoAside{max-width:60ch}
+}
+@media (min-width:701px){
+  /* La galería queda editorial y generosa, sin ocupar la pantalla completa. */
+  .fichaGallery .visor,.fichaGallery .pie{width:min(100%,960px);margin-left:auto;margin-right:auto}
 }
 @media (max-width:700px){
   .obras .galeria{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 0 18px;overscroll-behavior-inline:contain;scrollbar-width:none}.obras .galeria::-webkit-scrollbar{display:none}
@@ -1421,7 +1427,7 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
   .fichaBody{width:calc(100% - 36px)}.fichaInfo{grid-template-columns:1fr;gap:44px;padding:76px 0}.fichaInfoLead h3{font-size:42px}
   .fichaGallery .visor{aspect-ratio:16/10}.fichaGallery .visor img{object-fit:contain}.galleryNav{width:24%}.galleryNav span{width:42px;height:42px}
   .fichaRelato{grid-template-columns:1fr;gap:30px}.fichaRelato blockquote{font-size:34px}
-  .fichaPlanoGrid .planoCaja{min-height:380px}.fichaPlanoGrid .plano{min-height:260px}
+  .fichaPlanoGrid .planoCaja{min-height:380px}.fichaPlanoGrid .plano{min-height:260px}.planoMedia{min-height:260px}.planoImagen{max-height:320px}
   .fichaAgenda{display:block;padding:34px 26px}.fichaAgenda button{width:100%;margin-top:32px}
 }
 
@@ -1432,6 +1438,7 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
     transition-duration:.001ms !important;transition-delay:0s !important;
   }
   .reveal .part{opacity:1;transform:none}
+  .scatterCopy .scatterWord{opacity:1;transform:none;transition:none}
   .ambient{animation:none}
   .dust{display:none}
   .obra .linea{opacity:1;transform:none}
@@ -1498,24 +1505,24 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </div>
 
     <div class="bands" id="bands">
-      <section class="band b1" data-a="0" data-b="0.30" data-ramp="0.045">
+      <section class="band b1" data-a="0" data-b="0.40" data-ramp="0.08">
         <div class="heroLead">
           <span class="kicker">residencias de autor · méxico</span>
           <p>Arquitectura contemporánea, paisaje y certeza contractual en tres casas listas para explorar.</p>
         </div>
         <h1 class="heroMasthead" data-split="word">vértice</h1>
-        <p class="heroEdition">Valle de Bravo · Careyes · San Miguel · Tepoztlán</p>
+        <p class="heroEdition">Riviera Nayarit · Tapalpa · Costa Careyes</p>
         <div class="heroDiscover">
           <a href="#obras">Descubrir casas <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
-      <section class="band b2" data-a="0.35" data-b="0.65" data-ramp="0.045" data-spread="0.5">
+      <section class="band b2" data-a="0.30" data-b="0.72" data-ramp="0.08">
         <span class="kicker">disponibilidad inmediata</span>
-        <h2 data-split="char">tres residencias</h2>
+        <h2 data-split="word">tres residencias para comparar con claridad</h2>
       </section>
 
-      <section class="band b3" data-a="0.72" data-b="1" data-ramp="0.05">
+      <section class="band b3" data-a="0.62" data-b="1" data-ramp="0.08">
         <span class="kicker">sin costo y sin compromiso</span>
         <h2 data-split="word">agenda una visita con el arquitecto</h2>
         <p class="sub">Sesenta minutos en el terreno o en la unidad, con el arquitecto que firmó el proyecto. Respondemos en menos de dos horas hábiles.</p>
@@ -1605,7 +1612,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <img src="assets/casa-palmar-exterior-900.webp"
              srcset="assets/casa-palmar-exterior-400.webp 400w, assets/casa-palmar-exterior-900.webp 900w, assets/casa-palmar-exterior-1600.webp 1600w"
              sizes="(max-width: 700px) 88vw, (max-width: 1080px) 46vw, 430px"
-             alt="Casa Palmar, residencia contemporánea abierta a un jardín tropical." loading="eager" decoding="sync" width="1672" height="941">
+             alt="Casa Palmar, residencia contemporánea abierta a un jardín tropical." loading="lazy" decoding="async" width="1672" height="941">
         <div class="cara">
           <div class="top">
             <span class="glass">N°034 · 2026</span>
@@ -1628,7 +1635,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <img src="assets/casa-mirador-exterior-900.webp"
              srcset="assets/casa-mirador-exterior-400.webp 400w, assets/casa-mirador-exterior-900.webp 900w, assets/casa-mirador-exterior-1600.webp 1600w"
              sizes="(max-width: 700px) 88vw, (max-width: 1080px) 46vw, 430px"
-             alt="Casa Mirador, residencia de montaña con alberca y vistas abiertas al valle." loading="eager" decoding="sync" width="1672" height="941">
+             alt="Casa Mirador, residencia de montaña con alberca y vistas abiertas al valle." loading="lazy" decoding="async" width="1672" height="941">
         <div class="cara">
           <div class="top">
             <span class="glass">N°041 · 2026</span>
@@ -1651,7 +1658,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
         <img src="assets/obra-corte-900.webp"
              srcset="assets/obra-corte-400.webp 400w, assets/obra-corte-900.webp 900w, assets/obra-corte-1600.webp 1600w"
              sizes="(max-width: 700px) 88vw, (max-width: 1080px) 46vw, 430px"
-             alt="Casa Corte: un voladizo de concreto de nueve metros sobre el acantilado en Careyes." loading="eager" decoding="sync" width="1920" height="1084">
+             alt="Casa Corte: un voladizo de concreto de nueve metros sobre el acantilado en Careyes." loading="lazy" decoding="async" width="1920" height="1084">
         <div class="cara">
           <div class="top">
             <span class="glass">N°008 · 2023</span>
@@ -1677,25 +1684,25 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 <section class="section lahora" id="lahora" style="padding:10px 0">
  <div class="revelaPin" id="revelaPin">
   <div class="holder" id="holder">
-    <video class="horaFilm" id="horaVideo" muted playsinline preload="auto"
-           poster="assets/hero-poster-1280.webp" aria-hidden="true" tabindex="-1">
-      <source src="assets/hero-scrub-movil.mp4" type="video/mp4" media="(max-width:900px)">
-      <source src="assets/hero-scrub.mp4" type="video/mp4">
+    <video class="horaFilm" id="horaVideo" muted playsinline preload="none"
+           data-poster="assets/hero-poster-1280.webp" aria-hidden="true" tabindex="-1">
+      <source data-src="assets/hero-scrub-movil.mp4" type="video/mp4" media="(max-width:900px)">
+      <source data-src="assets/hero-scrub.mp4" type="video/mp4">
     </video>
     <div class="bloom" aria-hidden="true"></div>
     <div class="dust" id="dust" aria-hidden="true"></div>
     <div class="vignette" aria-hidden="true"></div>
 
     <div class="holdtext">
-      <span class="kicker">una casa vértice · lo que compras, no solo lo que se ve</span>
-      <h2>los datos que sostienen la fotografía</h2>
-      <p class="intro">Sigue bajando: la luz de las 19:40 entra sola, y con ella los números que un comprador necesita antes de firmar.</p>
+      <span class="kicker">claridad comercial junto a la arquitectura</span>
+      <h2>la imagen despierta interés. los datos permiten decidir.</h2>
+      <p class="intro">Ubicación, escala, financiamiento y condiciones de entrega aparecen junto a la imagen. Así puedes comparar antes de hablar con un asesor.</p>
     </div>
     <div class="datosFlot" id="datosFlot">
-      <div class="df" data-at="0.12"><b>1h 40</b><span>en coche desde la Ciudad de México</span></div>
-      <div class="df" data-at="0.34"><b>420 m²</b><span>construidos sobre 850 m² de terreno con escritura individual</span></div>
-      <div class="df" data-at="0.58"><b>Poniente</b><span>orientación del muro de 14 metros de cristal, sol de tarde todo el año</span></div>
-      <div class="df" data-at="0.82"><b>Entrega verificable</b><span>fecha por contrato, con penalización a nuestro cargo si nos atrasamos</span></div>
+      <div class="df" data-at="0.12"><b>03 casas</b><span>con precio, superficie, galería y disponibilidad visibles</span></div>
+      <div class="df" data-at="0.34"><b>72 horas</b><span>para conocer la preautorización bancaria</span></div>
+      <div class="df" data-at="0.58"><b>10 años</b><span>de garantía estructural transferible al siguiente propietario</span></div>
+      <div class="df" data-at="0.82"><b>45 días</b><span>promedio desde el contrato hasta la escritura</span></div>
     </div>
   </div>
  </div>
@@ -1760,15 +1767,15 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
   <div class="inner equipoGrid">
     <div class="equipoPeople" aria-label="Equipo Vértice">
       <figure class="equipoPerson equipoPersonA">
-        <img src="assets/proceso-visita-900.webp" srcset="assets/proceso-visita-400.webp 400w, assets/proceso-visita-900.webp 900w" sizes="(max-width:700px) 68vw, 240px" alt="Dirección de arquitectura durante la revisión de una residencia" loading="lazy" decoding="async" width="900" height="1200">
+        <img src="assets/equipo-arquitectura-960.webp" srcset="assets/equipo-arquitectura-480.webp 480w, assets/equipo-arquitectura-960.webp 960w" sizes="(max-width:700px) 68vw, 300px" alt="Directora de arquitectura de Vértice con planos de proyecto" loading="lazy" decoding="async" width="960" height="1280">
         <figcaption><b>Dirección de arquitectura</b><span>Proyecto y materialidad</span></figcaption>
       </figure>
       <figure class="equipoPerson equipoPersonB">
-        <img src="assets/proceso-obra-900.webp" srcset="assets/proceso-obra-400.webp 400w, assets/proceso-obra-900.webp 900w" sizes="(max-width:700px) 68vw, 240px" alt="Supervisión técnica de una obra residencial" loading="lazy" decoding="async" width="900" height="1200">
+        <img src="assets/equipo-supervision-960.webp" srcset="assets/equipo-supervision-480.webp 480w, assets/equipo-supervision-960.webp 960w" sizes="(max-width:700px) 68vw, 300px" alt="Responsable de supervisión de obra de Vértice con planos" loading="lazy" decoding="async" width="960" height="1280">
         <figcaption><b>Supervisión de obra</b><span>Calidad y calendario</span></figcaption>
       </figure>
       <figure class="equipoPerson equipoPersonC">
-        <img src="assets/proceso-estudio-900.webp" srcset="assets/proceso-estudio-400.webp 400w, assets/proceso-estudio-900.webp 900w" sizes="(max-width:700px) 68vw, 240px" alt="Equipo de documentación arquitectónica trabajando en el estudio" loading="lazy" decoding="async" width="900" height="1200">
+        <img src="assets/equipo-documentacion-960.webp" srcset="assets/equipo-documentacion-480.webp 480w, assets/equipo-documentacion-960.webp 960w" sizes="(max-width:700px) 68vw, 300px" alt="Responsable de documentación técnica de Vértice con planos" loading="lazy" decoding="async" width="960" height="1280">
         <figcaption><b>Documentación</b><span>Planos y expediente técnico</span></figcaption>
       </figure>
     </div>
@@ -1800,9 +1807,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       </div>
 
       <div class="pruebaFoto part" id="pruebaFoto" aria-hidden="true">
-        <img class="pf on" src="assets/casa-palmar-exterior-900.webp" alt="" loading="lazy" decoding="async">
-        <img class="pf" src="assets/casa-mirador-exterior-900.webp" alt="" loading="lazy" decoding="async">
-        <img class="pf" src="assets/obra-corte-900.webp" alt="" loading="lazy" decoding="async">
+        <img class="pf on" src="assets/casa-palmar-exterior-400.webp" srcset="assets/casa-palmar-exterior-400.webp 400w, assets/casa-palmar-exterior-900.webp 900w" sizes="(max-width:700px) 92vw, 560px" alt="" loading="lazy" decoding="async" width="900" height="507">
+        <img class="pf" src="assets/casa-mirador-exterior-400.webp" srcset="assets/casa-mirador-exterior-400.webp 400w, assets/casa-mirador-exterior-900.webp 900w" sizes="(max-width:700px) 92vw, 560px" alt="" loading="lazy" decoding="async" width="900" height="507">
+        <img class="pf" src="assets/obra-corte-400.webp" srcset="assets/obra-corte-400.webp 400w, assets/obra-corte-900.webp 900w" sizes="(max-width:700px) 92vw, 560px" alt="" loading="lazy" decoding="async" width="900" height="507">
         <span class="pfLabel" id="pfLabel">casa palmar</span>
       </div>
     </div>
@@ -1832,7 +1839,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </div>
     <div class="procesoCards" aria-label="Etapas del proceso de compra">
       <article class="procesoCard procesoCardWide">
-        <img src="assets/proceso-visita-900.webp" srcset="assets/proceso-visita-400.webp 400w, assets/proceso-visita-900.webp 900w" sizes="(max-width:760px) 92vw, 55vw" alt="Arquitecta y cliente revisando una residencia antes de la compra" loading="lazy" decoding="async" width="900" height="1200">
+        <img src="assets/visita-privada-960.webp" srcset="assets/visita-privada-480.webp 480w, assets/visita-privada-960.webp 960w" sizes="(max-width:760px) 92vw, 55vw" alt="Arquitecta de Vértice presentando una residencia durante una visita privada" loading="lazy" decoding="async" width="960" height="1280">
         <div class="procesoCardCopy"><span>01 · visita privada · 60 min</span><h3>Recorre la casa con quien la diseñó.</h3><p>Revisa medidas, materiales y decisiones de obra. Sales con respuestas claras, sin costo y sin compromiso.</p><b>Sin costo · sin compromiso</b></div>
       </article>
       <article class="procesoCard">
@@ -2094,11 +2101,11 @@ var bands = bandEls.map(function(el){
   };
 });
 
-var loadK = 0;
+var loadK = 1;
 function updateCaptions(p){
   for (var i = 0; i < bands.length; i++){
     var B = bands[i];
-    var f = Math.min(0.02, (B.b - B.a) / 3);
+    var f = Math.min(0.085, (B.b - B.a) * .28);
     var entra = B.primera ? 1 : smoothstep(p, B.a, B.a + f);
     var sale  = B.ultima  ? 0 : smoothstep(p, B.b - f, B.b);
     var op = entra * (1 - sale);
@@ -2133,14 +2140,10 @@ function paintHeroImage(p){
   if (heroCue) heroCue.style.opacity = clamp(1 - smoothstep(p,0,1) * 7,0,1).toFixed(3);
 }
 
-var target = 0, shown = 0, rafId = null, lastTick = 0, heroOnScreen = true;
-function tick(now){
-  var dt = Math.min(100, now - (lastTick || now));
-  lastTick = now;
-  var k = 0.14;
-  shown += (target - shown) * (1 - Math.pow(1 - k, dt / 16.667));
-  if (Math.abs(target - shown) < 0.0005){ shown = target; rafId = null; lastTick = 0; }
-  else { rafId = requestAnimationFrame(tick); }
+var target = 0, shown = 0, rafId = null, heroOnScreen = true;
+function tick(){
+  shown = target;
+  rafId = null;
   paintHeroImage(shown);
   updateCaptions(shown);
   if (bandsEl){
@@ -2159,16 +2162,6 @@ if (hero && 'IntersectionObserver' in window){
   }, { rootMargin: '12% 0px' }).observe(hero);
 }
 
-/* la banda 1 se arma sola al cargar y luego la manda el scroll */
-function runLoadRamp(){
-  var t0 = performance.now();
-  (function step(now){
-    loadK = clamp((now - t0) / 1200, 0, 1);
-    updateCaptions(shown);
-    if (loadK < 1) requestAnimationFrame(step);
-  })(performance.now());
-}
-
 /* ---------------------------------------------------------------
    4 · preparar la fotografía estática del hero
    --------------------------------------------------------------- */
@@ -2185,7 +2178,7 @@ function initHeroOnce(){
     if (heroImage.complete) ready();
     else heroImage.addEventListener('load',ready,{ once:true });
   }
-  runLoadRamp();
+  updateCaptions(heroProgress());
 }
 
 /* ---------------------------------------------------------------
@@ -2200,7 +2193,6 @@ function enableScrub(){
   if (scrubOn || !hero) return;
   scrubOn = true;
   initHeroOnce();
-  window.addEventListener('scroll', onScroll, { passive: true });
   bands.forEach(function(b){ b.op = -1; b.k = -1; });
   unpinFinalStates();
   updateCaptions(heroProgress());
@@ -2209,7 +2201,6 @@ function enableScrub(){
 function disableScrub(){
   if (!scrubOn) return;
   scrubOn = false;
-  window.removeEventListener('scroll', onScroll);
   if (rafId !== null){ cancelAnimationFrame(rafId); rafId = null; }
 }
 function applyHeroMode(){
@@ -2242,8 +2233,6 @@ function pintarNav(){
   });
   nav.classList.toggle('on-dark', sobreOscuro);
 }
-addEventListener('scroll', pintarNav, { passive: true });
-addEventListener('resize', pintarNav);
 
 /* ---------------------------------------------------------------
    7 · entradas de sección
@@ -2264,6 +2253,47 @@ if ('IntersectionObserver' in window){
 /* La presentación de Vértice se vuelve a escribir al regresar a la sección. */
 var sobreStory = document.getElementById('sobre');
 document.body.classList.add('motion-ready');
+
+/* Los párrafos se ordenan palabra por palabra al entrar, sin ocultar la lectura. */
+var paragraphObserver = null;
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  paragraphObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('scatterIn');
+      paragraphObserver.unobserve(entry.target);
+    });
+  }, { rootMargin:'0px 0px -8% 0px', threshold:.12 });
+}
+function prepareScatterCopy(root){
+  [].slice.call(root.querySelectorAll('p')).forEach(function(p, paragraphIndex){
+    if (p.classList.contains('scatterCopy') || p.closest('.hero,.static-hero') || p.children.length) return;
+    var copy = p.textContent.trim();
+    if (!copy || copy.length < 18) return;
+    p.classList.add('scatterCopy');
+    p.setAttribute('aria-label',copy);
+    p.textContent = '';
+    copy.split(/(\s+)/).forEach(function(token, i){
+      if (/^\s+$/.test(token)){ p.appendChild(document.createTextNode(token)); return; }
+      var word = document.createElement('span');
+      var x = ((i * 19 + paragraphIndex * 7) % 17) - 8;
+      var y = ((i * 13 + paragraphIndex * 5) % 15) - 5;
+      var rot = (((i * 11 + paragraphIndex * 3) % 9) - 4) * .32;
+      word.className = 'scatterWord';
+      word.setAttribute('aria-hidden','true');
+      word.style.setProperty('--scatter-x',x + 'px');
+      word.style.setProperty('--scatter-y',y + 'px');
+      word.style.setProperty('--scatter-r',rot.toFixed(2) + 'deg');
+      word.style.setProperty('--scatter-delay',Math.min(i * 12,180) + 'ms');
+      word.textContent = token;
+      p.appendChild(word);
+    });
+    if (paragraphObserver) paragraphObserver.observe(p);
+    else p.classList.add('scatterIn');
+  });
+}
+prepareScatterCopy(document);
+
 function sobreTick(){
   if (!sobreStory) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches){ sobreStory.classList.add('story-on'); return; }
@@ -2271,8 +2301,6 @@ function sobreTick(){
   var active = r.top < innerHeight * .82 && r.bottom > innerHeight * .14;
   sobreStory.classList.toggle('story-on', active);
 }
-addEventListener('scroll',sobreTick,{ passive:true });
-addEventListener('resize',sobreTick);
 sobreTick();
 
 /* ---------------------------------------------------------------
@@ -2284,6 +2312,28 @@ var dfs = [].slice.call(document.querySelectorAll('.df'));
 var horaVideo = document.getElementById('horaVideo');
 var horaPendingTime = null;
 var holdDone = false;
+
+/* El video conserva exactamente el recorrido, pero no compite con el hero por
+   ancho de banda ni por decodificación hasta que el lector se acerca a él. */
+function cargarVideoHora(){
+  if (!horaVideo || horaVideo.dataset.loaded === 'true') return;
+  horaVideo.dataset.loaded = 'true';
+  [].slice.call(horaVideo.querySelectorAll('source[data-src]')).forEach(function(source){
+    source.src = source.dataset.src;
+  });
+  horaVideo.poster = horaVideo.dataset.poster;
+  horaVideo.preload = 'metadata';
+  horaVideo.load();
+}
+if ('IntersectionObserver' in window && revelaPin){
+  new IntersectionObserver(function(entries, observer){
+    if (!entries.some(function(entry){ return entry.isIntersecting; })) return;
+    cargarVideoHora();
+    observer.disconnect();
+  }, { rootMargin:'140% 0px' }).observe(revelaPin);
+} else {
+  cargarVideoHora();
+}
 
 function requestHoraFrame(frac){
   if (!horaVideo || !horaVideo.duration || !isFinite(horaVideo.duration)) return;
@@ -2320,8 +2370,6 @@ function revelaTick(){
     el.style.transform = 'translateX(' + ((1 - t) * -34).toFixed(1) + 'px)';
   });
 }
-addEventListener('scroll', revelaTick, { passive: true });
-addEventListener('resize', revelaTick);
 revelaTick();
 
 /* ---------------------------------------------------------------
@@ -2342,8 +2390,6 @@ function porqueTick(){
     card.style.setProperty('--float-y',(progress * depth * 72).toFixed(1) + 'px');
   });
 }
-addEventListener('scroll', porqueTick, { passive: true });
-addEventListener('resize', porqueTick);
 porqueTick();
 
 /* ---------------------------------------------------------------
@@ -2385,8 +2431,6 @@ orbitNodes.forEach(function(node,i){
     scrollTo({ top:target,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   });
 });
-addEventListener('scroll',procesoTick,{ passive:true });
-addEventListener('resize',procesoTick);
 procesoTick();
 
 /* ---------------------------------------------------------------
@@ -2405,57 +2449,45 @@ function parallaxTick(){
     el.style.transform = 'translateY(' + ((vc - ec) * speed).toFixed(1) + 'px)';
   });
 }
-addEventListener('scroll', parallaxTick, { passive: true });
-addEventListener('resize', parallaxTick);
 parallaxTick();
 
-/* ---------------------------------------------------------------
-   8e · garantías · agrupación reversible al entrar y salir
-   --------------------------------------------------------------- */
-var garantiaDeck = document.getElementById('garantiaDeck');
-var garantiaCards = garantiaDeck ? [].slice.call(garantiaDeck.querySelectorAll('.gcard')) : [];
-var garantiaOffsets = [];
-function measureGarantia(){
-  if (!garantiaDeck || !garantiaCards.length) return;
-  var saved = garantiaCards.map(function(card){
-    var value = { transform:card.style.transform, transition:card.style.transition };
-    card.style.transition = 'none';
-    card.style.transform = 'none';
-    return value;
-  });
-  void garantiaDeck.offsetWidth;
-  var dr = garantiaDeck.getBoundingClientRect();
-  var cx = dr.left + dr.width / 2, cy = dr.top + dr.height / 2;
-  garantiaOffsets = garantiaCards.map(function(card,i){
-    var r = card.getBoundingClientRect();
-    return { x:cx - (r.left + r.width / 2), y:cy - (r.top + r.height / 2), rot:[-8,6,-4,8][i] };
-  });
-  garantiaCards.forEach(function(card,i){
-    card.style.transition = saved[i].transition;
-    card.style.transform = saved[i].transform;
-  });
+/* Un único frame por desplazamiento. Antes había seis listeners que medían y
+   escribían estilos por separado; ahora el navegador agrupa ese trabajo. */
+var pageFrame = null;
+var activeScrollAreas = new Map();
+var scrollAreas = [
+  [sobreStory, sobreTick],
+  [revelaPin, revelaTick],
+  [porquePin, porqueTick],
+  [procesoPin, procesoTick]
+].filter(function(item){ return !!item[0]; });
+scrollAreas.forEach(function(item){ activeScrollAreas.set(item[0], true); });
+
+if ('IntersectionObserver' in window){
+  var scrollAreaObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){ activeScrollAreas.set(entry.target, entry.isIntersecting); });
+    schedulePageFrame();
+  }, { rootMargin:'320px 0px' });
+  scrollAreas.forEach(function(item){ scrollAreaObserver.observe(item[0]); });
 }
-function garantiaTick(){
-  if (!garantiaDeck || !garantiaCards.length) return;
-  if (REDUCE_MOTION){ garantiaCards.forEach(function(card){ card.style.transform = 'none'; }); return; }
-  var r = garantiaDeck.getBoundingClientRect();
-  var enter = clamp((innerHeight - r.top) / (innerHeight * .92),0,1);
-  var leave = clamp(r.bottom / (innerHeight * .35),0,1);
-  var spread = Math.min(enter,leave);
-  spread = spread * spread * (3 - 2 * spread);
-  var fold = 1 - spread;
-  garantiaCards.forEach(function(card,i){
-    var o = garantiaOffsets[i] || {x:0,y:0,rot:0};
-    var scale = .84 + spread * .16;
-    card.style.zIndex = String(garantiaCards.length - i);
-    card.style.transform = 'translate3d(' + (o.x * fold).toFixed(1) + 'px,' + (o.y * fold).toFixed(1) + 'px,' + ((garantiaCards.length-i)*fold*3).toFixed(1) + 'px) rotate(' + (o.rot * fold).toFixed(2) + 'deg) scale(' + scale.toFixed(3) + ')';
-  });
+
+function paintPageFrame(){
+  pageFrame = null;
+  if (scrubOn && heroOnScreen){
+    target = heroProgress();
+    if (rafId !== null){ cancelAnimationFrame(rafId); rafId = null; }
+    tick();
+  }
+  pintarNav();
+  scrollAreas.forEach(function(item){ if (activeScrollAreas.get(item[0])) item[1](); });
+  parallaxTick();
 }
-function resizeGarantia(){ measureGarantia(); garantiaTick(); }
-measureGarantia();
-addEventListener('scroll',garantiaTick,{ passive:true });
-addEventListener('resize',resizeGarantia);
-garantiaTick();
+function schedulePageFrame(){
+  if (pageFrame !== null) return;
+  pageFrame = requestAnimationFrame(paintPageFrame);
+}
+addEventListener('scroll', schedulePageFrame, { passive:true });
+addEventListener('resize', schedulePageFrame, { passive:true });
 
 /* ---------------------------------------------------------------
    8f · quienes ya viven ahí · las fotos de las casas van rotando solas
@@ -2574,6 +2606,8 @@ var VILLAS = {
     nombre: 'casa palmar', lugar: 'Riviera Nayarit, Nayarit', num: 'N°034 · 2026',
     precio: 'USD 1,680,000', m2: '520 m²', rec: '4 recámaras', estado: 'Disponible', libre: true,
     foto: 'assets/casa-palmar-exterior',
+    planoImagen: 'assets/plano-palmar',
+    planoAlt: 'Vista axonométrica de la distribución de Casa Palmar.',
     detalle: 'Una residencia abierta al jardín, con dos niveles conectados por luz natural y una secuencia continua entre sala, terraza y paisaje.',
     relato: 'La casa no termina en el vidrio. La cubierta, la terraza y el jardín forman una sola estancia para vivir adentro y afuera con la misma comodidad.',
     luces: [[31,31,15,18],[51,33,13,19],[75,34,24,28],[39,59,13,17],[61,58,17,18],[81,59,22,18]],
@@ -2599,6 +2633,8 @@ var VILLAS = {
     nombre: 'casa mirador', lugar: 'Tapalpa, Jalisco', num: 'N°041 · 2026',
     precio: 'USD 2,240,000', m2: '610 m²', rec: '5 recámaras', estado: 'Disponible', libre: true,
     foto: 'assets/casa-mirador-exterior',
+    planoImagen: 'assets/plano-mirador-corte',
+    planoAlt: 'Vista axonométrica de la distribución de Casa Mirador.',
     detalle: 'Una residencia de montaña organizada alrededor de la vista. Cada nivel se abre al valle y conserva privacidad entre las áreas sociales y las suites.',
     relato: 'El paisaje funciona como fachada principal. La alberca, la sala y el pabellón exterior comparten un mismo horizonte sin bloquearse entre sí.',
     luces: [[39,26,14,14],[55,26,12,14],[72,43,16,16],[49,44,14,14]],
@@ -2671,6 +2707,8 @@ var VILLAS = {
     nombre: 'casa corte', lugar: 'Costa Careyes, Jalisco', num: 'N°008 · 2023',
     precio: 'USD 980,000', m2: '265 m²', rec: '3 recámaras', estado: 'Reservado', libre: false,
     foto: 'assets/obra-corte',
+    planoImagen: 'assets/plano-mirador-corte',
+    planoAlt: 'Vista axonométrica de la distribución de Casa Corte.',
     luces: [[78,44,22,30],[66,50,12,18]],
     detalle: 'Concreto aparente, madera y bosque. Casa Corte trabaja con vacíos precisos para que la luz revele la estructura a lo largo del día.',
     relato: 'La escalera, la cocina y la recámara nacen de una misma lógica material. Pocas piezas, bien resueltas, dejan que el bosque sea el acabado principal.',
@@ -2815,15 +2853,24 @@ function svgPlano(v){
          v.plano + pts + '</svg>';
 }
 
+function planoFicha(v){
+  if (!v.planoImagen) return svgPlano(v);
+  return '<picture class="planoMedia">' +
+    '<source srcset="' + v.planoImagen + '-512.webp 512w, ' + v.planoImagen + '-1024.webp 1024w" sizes="(max-width:700px) calc(100vw - 92px), 700px">' +
+    '<img class="planoImagen" src="' + v.planoImagen + '-512.webp" alt="' + v.planoAlt + '" width="1024" height="576" decoding="async">' +
+  '</picture>';
+}
+
 function construirFicha(v){
   var imgs = v.interiores.length ? v.interiores : [{ src: v.foto, pie: 'Vista exterior' }];
   var visor = imgs.map(function(im, i){
     var srcset = im.src + '-400.webp 400w, ' + im.src + '-900.webp 900w' + (im.compact ? '' : ', ' + im.src + '-1600.webp 1600w');
-    return '<img src="' + im.src + '-900.webp"' +
-           ' srcset="' + srcset + '"' +
-           ' sizes="(max-width: 700px) 92vw, 1120px"' +
+    var source = i === 0
+      ? 'src="' + im.src + '-900.webp" srcset="' + srcset + '" sizes="(max-width: 700px) 92vw, 960px"'
+      : 'data-src="' + im.src + '-900.webp" data-srcset="' + srcset + '" data-sizes="(max-width: 700px) 92vw, 960px"';
+    return '<img ' + source +
            ' alt="' + im.pie + '" class="' + (i === 0 ? 'viva' : '') + '" data-i="' + i + '"' +
-           (i === 0 ? '' : ' loading="lazy"') + ' decoding="async">';
+           ' decoding="async">';
   }).join('');
 
   return '' +
@@ -2855,9 +2902,9 @@ function construirFicha(v){
       '<section class="fichaRelato"><span>idea de proyecto</span><blockquote>' + (v.relato || v.detalle) + '</blockquote></section>' +
       '<section class="fichaPlanoWrap">' +
         '<div class="fichaSectionHead"><div><span>distribución</span><h3>plano arquitectónico</h3></div></div>' +
-        '<div class="fichaPlanoGrid"><div class="planoCaja">' + svgPlano(v) +
-          '<p class="notaPunto" id="notaPunto"><b>' + v.puntos[0].t + '</b>' + v.puntos[0].n + '</p>' +
-        '</div><aside class="fichaPlanoAside"><h4>Explora los puntos de interés.</h4><p>Selecciona cada número para entender la distribución, la orientación y las decisiones que definen esta casa.</p></aside></div>' +
+        '<div class="fichaPlanoGrid"><div class="planoCaja' + (v.planoImagen ? ' planoImagenCaja' : '') + '">' + planoFicha(v) +
+          '<p class="notaPunto" id="notaPunto"><b>' + (v.planoImagen ? 'Vista de distribución.' : v.puntos[0].t) + '</b>' + (v.planoImagen ? 'Una lectura espacial de la casa, sus niveles y su relación con el terreno.' : v.puntos[0].n) + '</p>' +
+        '</div><aside class="fichaPlanoAside"><h4>' + (v.planoImagen ? 'La casa, vista por dentro.' : 'Explora los puntos de interés.') + '</h4><p>' + (v.planoImagen ? 'Esta vista axonométrica permite entender la distribución, la altura de los espacios y cómo se conectan las áreas de la residencia.' : 'Selecciona cada número para entender la distribución, la orientación y las decisiones que definen esta casa.') + '</p></aside></div>' +
       '</section>' +
       '<section class="fichaAgenda"><div><span>siguiente paso</span><h3>Conoce la casa en persona.</h3></div><button id="fichaAgendar" type="button">Agendar visita <b aria-hidden="true">↗</b></button></section>' +
     '</div>' +
@@ -2872,17 +2919,58 @@ function cablearFicha(v){
 
   var counter = document.getElementById('galleryCounter');
   var activeImage = 0;
+  var pendingImage = null;
+  function cargarImagen(im){
+    if (!im || !im.dataset.src) return;
+    im.src = im.dataset.src;
+    im.srcset = im.dataset.srcset;
+    im.sizes = im.dataset.sizes;
+    delete im.dataset.src;
+    delete im.dataset.srcset;
+    delete im.dataset.sizes;
+  }
+  function precargarSiguiente(i){
+    var next = imgs[(i + imgs.length) % imgs.length];
+    var idle = window.requestIdleCallback
+      ? function(fn){ window.requestIdleCallback(fn, { timeout:900 }); }
+      : function(fn){ setTimeout(fn, 180); };
+    idle(function(){ cargarImagen(next); });
+  }
   function mostrarImagen(i){
-    activeImage = (i + imgs.length) % imgs.length;
-    imgs.forEach(function(im){ im.classList.toggle('viva', +im.dataset.i === activeImage); });
-    pie.textContent = lista[activeImage].pie;
-    counter.textContent = String(activeImage + 1).padStart(2,'0') + ' / ' + String(imgs.length).padStart(2,'0');
+    var siguiente = (i + imgs.length) % imgs.length;
+    var imagen = imgs[siguiente];
+    if (siguiente === activeImage || pendingImage === imagen) return;
+    pendingImage = imagen;
+    cargarImagen(imagen);
+    function revelar(){
+      if (pendingImage !== imagen) return;
+      pendingImage = null;
+      activeImage = siguiente;
+      imgs.forEach(function(im){ im.classList.toggle('viva', +im.dataset.i === activeImage); });
+      pie.textContent = lista[activeImage].pie;
+      counter.textContent = String(activeImage + 1).padStart(2,'0') + ' / ' + String(imgs.length).padStart(2,'0');
+      precargarSiguiente(activeImage + 1);
+    }
+    if (imagen.complete && imagen.naturalWidth) revelar();
+    else imagen.addEventListener('load', revelar, { once:true });
   }
   panelficha.querySelector('.galleryPrev').addEventListener('click',function(){ mostrarImagen(activeImage - 1); });
   panelficha.querySelector('.galleryNext').addEventListener('click',function(){ mostrarImagen(activeImage + 1); });
+  precargarSiguiente(activeImage + 1);
 
   var nota = document.getElementById('notaPunto');
   var grupos = [].slice.call(panelficha.querySelectorAll('.pt'));
+  if (!nota || !grupos.length) {
+    document.getElementById('fichaAgendar').addEventListener('click',function(){
+      cerrarFicha();
+      setTimeout(function(){
+        var destino = document.getElementById('agendar');
+        if (destino) destino.scrollIntoView({ behavior: reducido() ? 'auto' : 'smooth', block:'start' });
+      },560);
+    });
+    document.getElementById('cerrarFicha').addEventListener('click', cerrarFicha);
+    return;
+  }
   function activar(i){
     grupos.forEach(function(g){ g.classList.toggle('activa', +g.dataset.i === i); });
     nota.innerHTML = '<b>' + v.puntos[i].t + '</b>' + v.puntos[i].n;
@@ -2928,6 +3016,7 @@ function abrirFicha(card){
   ultimaTarjeta = card;
 
   panelficha.innerHTML = construirFicha(v);
+  prepareScatterCopy(panelficha);
   cablearFicha(v);
   fullficha.classList.add('on');
   document.body.classList.add('bloqueado');
