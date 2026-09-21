@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>VÉRTICE · Tres residencias de autor en México</title>
+<title>Abogado Inmobiliario · Residencias de autor en México</title>
 <meta name="description" content="Tres residencias de autor en México. Explora cada casa, su galería, plano arquitectónico y disponibilidad antes de agendar una visita privada.">
 <meta name="theme-color" content="#F4F2EF">
 <meta property="og:type" content="website">
-<meta property="og:title" content="VÉRTICE · Residencias de autor en México">
+<meta property="og:title" content="Abogado Inmobiliario · Residencias de autor en México">
 <meta property="og:description" content="Tres residencias de autor con galería, información comercial, plano y visita privada.">
 <!-- DEPLOY STEP: sustituir las tres URL absolutas por la dirección real al publicar -->
 <meta property="og:url" content="https://vertice-opal.vercel.app/">
 <meta property="og:image" content="https://vertice-opal.vercel.app/assets/hero-torre-1672.webp">
 <link rel="canonical" href="https://vertice-opal.vercel.app/">
 <meta property="og:locale" content="es_MX">
-<meta property="og:site_name" content="VÉRTICE">
+<meta property="og:site_name" content="Abogado Inmobiliario">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="VÉRTICE · Residencias de autor en México">
+<meta name="twitter:title" content="Abogado Inmobiliario · Residencias de autor en México">
 <meta name="twitter:description" content="Tres residencias de autor con galería, plano y visita privada.">
 <meta name="twitter:image" content="https://vertice-opal.vercel.app/assets/hero-torre-1672.webp">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23232120'/%3E%3Cpath d='M9 9 L16 23 L23 9' fill='none' stroke='%23B98E62' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
 <link rel="preload" as="image" href="assets/hero-torre-1672.webp" media="(min-width:701px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero-torre-mobile.webp" media="(max-width:700px)" fetchpriority="high">
 <link rel="preload" as="font" href="assets/outfit-latin.woff2" type="font/woff2" crossorigin>
@@ -121,7 +121,8 @@ button{font:inherit;color:inherit}
   background:rgba(25,23,21,.52);border-color:rgba(255,255,255,.14);
   box-shadow:0 10px 40px rgba(0,0,0,.28);color:#F6F2ED;
 }
-.brand{font-family:var(--display);font-weight:300;font-size:21px;letter-spacing:-.02em;text-decoration:none}
+.brand{font-family:var(--display);font-weight:300;font-size:21px;letter-spacing:-.02em;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.brand svg{width:27px;height:27px;flex:none}
 .navlinks{display:flex;gap:30px;margin-left:auto}
 .navlinks a{
   font-size:13.5px;text-decoration:none;color:inherit;opacity:.7;
@@ -307,7 +308,7 @@ main{position:relative;z-index:2}
 .sobre .sechead{margin-bottom:0}
 .sobre .big{
   white-space:nowrap;
-  font-size:clamp(58px,10.5vw,152px);
+  font-size:clamp(38px,6.8vw,100px);
   word-spacing:.06em;
 }
 .sobre .tag{display:none}
@@ -721,7 +722,9 @@ footer .inner{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between
 @media (max-width:640px){
   .heroImage{object-position:49% 50%}
   .navlinks{display:none}
-  .nav{padding:8px 8px 8px 18px}
+  .nav{padding:8px 8px 8px 14px}
+  .brand{font-size:15.5px;gap:8px}
+  .brand svg{width:22px;height:22px}
   .nav > .pill{margin-left:auto}
   .obras,.conversacion,.holder,.porque{margin:0 6px;border-radius:var(--r-lg)}
 }
@@ -734,7 +737,7 @@ footer .inner{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between
 .heroLead{display:grid;grid-template-columns:minmax(160px,.58fr) minmax(240px,1fr);gap:clamp(24px,5vw,82px);align-items:start;max-width:680px}
 .heroLead .kicker{margin:0;color:rgba(255,255,255,.72)}
 .heroLead p{margin:0;max-width:36ch;font-size:clamp(13px,1.05vw,16px);line-height:1.42;color:rgba(255,255,255,.9);text-wrap:balance}
-.b1 .heroMasthead{position:absolute;z-index:0;left:clamp(18px,2vw,34px);right:0;top:27%;max-width:none;font-size:clamp(118px,19.6vw,296px);line-height:.7;letter-spacing:-.072em;text-transform:uppercase;color:rgba(255,255,255,.9);white-space:nowrap;text-shadow:0 8px 32px rgba(0,0,0,.18)}
+.b1 .heroMasthead{position:absolute;z-index:0;left:clamp(18px,2vw,34px);right:0;top:27%;max-width:7em;font-size:clamp(62px,10vw,148px);line-height:.8;letter-spacing:-.06em;text-transform:uppercase;color:rgba(255,255,255,.9);white-space:normal;text-shadow:0 8px 32px rgba(0,0,0,.18)}
 .b1 .heroMasthead .w{position:relative;z-index:0}
 .heroEdition{position:absolute;left:clamp(28px,4.8vw,76px);bottom:clamp(28px,5vh,52px);margin:0;font-size:9.5px;line-height:1.4;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 .heroDiscover{position:absolute;left:50%;bottom:clamp(26px,4.5vh,48px);transform:translateX(-50%);pointer-events:auto}
@@ -787,7 +790,7 @@ footer .inner{display:flex;flex-wrap:wrap;gap:30px;justify-content:space-between
   .stage{top:6px;height:calc(100svh - 12px);margin:0 6px;border-radius:var(--r-lg)}
   .b1{justify-content:flex-start;padding:112px 20px 0}
   .heroLead{display:block;max-width:31ch}.heroLead .kicker{margin-bottom:12px}.heroLead p{font-size:13px}
-  .b1 .heroMasthead{left:18px;top:35%;font-size:clamp(76px,25vw,108px);line-height:.78}
+  .b1 .heroMasthead{left:18px;top:32%;font-size:clamp(44px,14vw,62px);line-height:.82}
   .heroEdition{left:20px;right:20px;bottom:96px;font-size:8px}.heroDiscover{bottom:30px}.floaters,.cue{display:none}
   .obras{margin:0 6px;padding-top:92px;border-radius:var(--r-lg)}
   .obrasEditorial{display:block;padding-bottom:28px}.obrasIdentity{gap:30px}.obrasStats{margin-top:28px}
@@ -1134,7 +1137,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 <div class="ambient" aria-hidden="true"></div>
 
 <nav class="nav" id="nav">
-  <a class="brand" href="#top">vértice</a>
+  <a class="brand" href="#top"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><defs><linearGradient id="logoGrad" x1="10" y1="58" x2="56" y2="6" gradientUnits="userSpaceOnUse"><stop stop-color="#2CE5C0"/><stop offset="1" stop-color="#2B8FEA"/></linearGradient></defs><g stroke="url(#logoGrad)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 33 L32 8 L59 33"/><path d="M13.5 33 V52.5 Q13.5 56 17 56 H47 Q50.5 56 50.5 52.5 V33"/><path d="M25 56 V40.5 H41 V49.5 H32.5"/></g></svg>abogado inmobiliario</a>
   <div class="navlinks">
     <a href="#obras">obras</a>
     <a href="#proceso">proceso</a>
@@ -1159,7 +1162,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
     <div class="cue" id="heroCue" aria-hidden="true"><span class="line"></span><span>desliza</span></div>
 
-    <div class="floaters" aria-label="Experiencia de Vértice">
+    <div class="floaters" aria-label="Experiencia de Abogado Inmobiliario">
       <div class="floater"><b>03</b><span>residencias para explorar</span></div>
       <div class="floater"><b>10</b><span>años de garantía estructural</span></div>
       <div class="floater"><b>45</b><span>días hábiles promedio a escrituras</span></div>
@@ -1171,7 +1174,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
           <span class="kicker">residencias de autor · méxico</span>
           <p>Arquitectura contemporánea, paisaje y certeza contractual en tres casas listas para explorar.</p>
         </div>
-        <h1 class="heroMasthead" data-split="word">vértice</h1>
+        <h1 class="heroMasthead" data-split="word">abogado inmobiliario</h1>
         <p class="heroEdition">Riviera Nayarit · Tapalpa · Costa Careyes</p>
         <div class="heroDiscover">
           <a href="#obras">Descubrir casas <span aria-hidden="true">↗</span></a>
@@ -1221,9 +1224,9 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 <section class="section sobre reveal" id="sobre">
   <div class="inner">
     <div class="sechead sobreHead">
-      <h2 class="big aboutType" aria-label="sobre vértice"><span class="typedWord" style="--chars:5">sobre</span> <em class="typedWord" style="--chars:7;--word-delay:.58s">vértice</em><span class="typeCaret" aria-hidden="true"></span></h2>
+      <h2 class="big aboutType" aria-label="sobre abogado inmobiliario"><span class="typedWord" style="--chars:5">sobre</span> <em class="typedWord" style="--chars:20;--word-delay:.58s">abogado inmobiliario</em><span class="typeCaret" aria-hidden="true"></span></h2>
       <span class="tag">desarrolladora · residencial premium</span>
-      <div class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.4 9.1 L20 6.3 L15.6 12 L20 17.7 L13.4 14.9 L12 22 L10.6 14.9 L4 17.7 L8.4 12 L4 6.3 L10.6 9.1 Z"/></svg></div>
+      <div class="mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><g stroke="url(#logoGrad)" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 33 L32 8 L59 33"/><path d="M13.5 33 V52.5 Q13.5 56 17 56 H47 Q50.5 56 50.5 52.5 V33"/><path d="M25 56 V40.5 H41 V49.5 H32.5"/></g></svg></div>
     </div>
 
     <p class="lede">
@@ -1375,7 +1378,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     <div class="inner">
       <header class="porqueIntro">
         <div class="porqueTrust">
-          <span>por qué vértice</span>
+          <span>por qué abogado inmobiliario</span>
           <strong>3 casas</strong>
           <p>Un catálogo corto para comparar cada decisión con claridad.</p>
         </div>
@@ -1550,7 +1553,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     </div>
 
     <div class="faq part">
-      <details><summary>¿Ofrecen financiamiento?</summary><p class="a">Sí. Esquema directo de VÉRTICE hasta 36 meses sin intereses sobre el 40% del valor, y convenio con tres instituciones bancarias para crédito hipotecario con preautorización en 72 horas.</p></details>
+      <details><summary>¿Ofrecen financiamiento?</summary><p class="a">Sí. Esquema directo de Abogado Inmobiliario hasta 36 meses sin intereses sobre el 40% del valor, y convenio con tres instituciones bancarias para crédito hipotecario con preautorización en 72 horas.</p></details>
       <details><summary>¿Cuáles son los plazos de entrega?</summary><p class="a">Unidades en Torre Norte: entrega inmediata en pisos 01 a 04 y diciembre de 2026 en pisos 05 a 08. Residencias unifamiliares: 11 a 16 meses desde la firma, con penalización contractual por retraso a cargo del desarrollador.</p></details>
       <details><summary>¿Qué garantías incluye la propiedad?</summary><p class="a">Diez años en estructura, cinco en impermeabilización e instalaciones ocultas, y dos en acabados e instalaciones visibles. Todo respaldado por póliza de garantía transferible al siguiente propietario.</p></details>
       <details><summary>¿Cómo agendo una visita?</summary><p class="a">Desde el formulario de esta página o por WhatsApp. Las visitas son con arquitecto del proyecto, duran 60 minutos y se agendan de lunes a sábado. Respondemos en menos de 2 horas hábiles.</p></details>
@@ -1636,7 +1639,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
     {
       "@type": "RealEstateAgent",
       "@id": "https://vertice-opal.vercel.app/#org",
-      "name": "VÉRTICE",
+      "name": "Abogado Inmobiliario",
       "description": "Desarrolladora de residencias de autor en México. Marca ficticia creada como pieza de demostración.",
       "areaServed": ["Valle de Bravo", "Sierra Norte de Puebla", "Costa Careyes", "San Miguel de Allende", "Tepoztlán", "Ciudad de México"],
       "address": {
@@ -1655,14 +1658,14 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       "@type": "WebSite",
       "@id": "https://vertice-opal.vercel.app/#sitio",
       "url": "https://vertice-opal.vercel.app/",
-      "name": "VÉRTICE",
+      "name": "Abogado Inmobiliario",
       "inLanguage": "es-MX",
       "publisher": { "@id": "https://vertice-opal.vercel.app/#org" }
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "¿Ofrecen financiamiento?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Esquema directo de VÉRTICE hasta 36 meses sin intereses sobre el 40% del valor, y convenio con tres instituciones bancarias para crédito hipotecario con preautorización en 72 horas." } },
+        { "@type": "Question", "name": "¿Ofrecen financiamiento?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Esquema directo de Abogado Inmobiliario hasta 36 meses sin intereses sobre el 40% del valor, y convenio con tres instituciones bancarias para crédito hipotecario con preautorización en 72 horas." } },
         { "@type": "Question", "name": "¿Cuáles son los plazos de entrega?", "acceptedAnswer": { "@type": "Answer", "text": "Unidades en Torre Norte: entrega inmediata en pisos 01 a 04 y diciembre de 2026 en pisos 05 a 08. Residencias unifamiliares: 11 a 16 meses desde la firma, con penalización contractual por retraso a cargo del desarrollador." } },
         { "@type": "Question", "name": "¿Qué garantías incluye la propiedad?", "acceptedAnswer": { "@type": "Answer", "text": "Diez años en estructura, cinco en impermeabilización e instalaciones ocultas, y dos en acabados e instalaciones visibles. Todo respaldado por póliza de garantía transferible al siguiente propietario." } },
         { "@type": "Question", "name": "¿Cómo agendo una visita?", "acceptedAnswer": { "@type": "Answer", "text": "Desde el formulario de esta página o por WhatsApp. Las visitas son con arquitecto del proyecto, duran 60 minutos y se agendan de lunes a sábado. Respondemos en menos de 2 horas hábiles." } },
@@ -1676,8 +1679,8 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
 <footer>
   <div class="inner">
-    <p class="aviso">VÉRTICE es una marca ficticia, creada como pieza de demostración. Los proyectos, los precios y los testimonios son inventados. Las imágenes y el video se generaron con inteligencia artificial.</p>
-    <span class="footbrand" aria-hidden="true">vértice</span>
+    <p class="aviso">Abogado Inmobiliario es una marca ficticia, creada como pieza de demostración. Los proyectos, los precios y los testimonios son inventados. Las imágenes y el video se generaron con inteligencia artificial.</p>
+    <span class="footbrand" aria-hidden="true">abogado inmobiliario</span>
   </div>
 </footer>
 
