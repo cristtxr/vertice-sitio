@@ -135,7 +135,9 @@ function onScroll(){
 if (hero && 'IntersectionObserver' in window){
   new IntersectionObserver(function(es){
     heroOnScreen = es[0].isIntersecting;
-    if (heroOnScreen && rafId === null && scrubOn) rafId = requestAnimationFrame(tick);
+    /* al reaparecer, el objetivo puede venir de antes de salir de pantalla:
+       se recalcula para no pintar el hero con un progreso obsoleto */
+    if (heroOnScreen && rafId === null && scrubOn){ target = heroProgress(); rafId = requestAnimationFrame(tick); }
   }, { rootMargin: '12% 0px' }).observe(hero);
 }
 
@@ -404,76 +406,6 @@ function revelaTick(){
 revelaTick();
 
 /* ---------------------------------------------------------------
-   8b · por qué vértice · galería horizontal atada al scroll vertical
-   --------------------------------------------------------------- */
-var porquePin = document.getElementById('porquePin');
-var pista = document.getElementById('pista');
-var porqueCards = pista ? [].slice.call(pista.querySelectorAll('.razon')) : [];
-function porqueTick(){
-  if (!porquePin || !pista) return;
-  var r = porquePin.getBoundingClientRect();
-  /* Las anotaciones respiran dentro de la fotografía, sin abandonar
-     su sitio ni competir con la lectura. */
-  var center = innerHeight * .5;
-  var progress = clamp((center - (r.top + r.height * .5)) / Math.max(r.height,.01), -.7, .7);
-  porqueCards.forEach(function(card){
-    var depth = parseFloat(card.dataset.depth) || 0;
-    var v = (progress * depth * 72).toFixed(1) + 'px';
-    /* Reescribir el mismo valor invalida igual el elemento, y estas tarjetas
-       llevan backdrop-filter: obligaria a recalcular el desenfoque cada frame
-       para dejarlo identico. Solo se escribe cuando cambia. */
-    if (card.__floatY === v) return;
-    card.__floatY = v;
-    card.style.setProperty('--float-y', v);
-  });
-}
-porqueTick();
-
-/* ---------------------------------------------------------------
-   8c · atlas orbital · el scroll conecta imagen, texto y evidencia
-   --------------------------------------------------------------- */
-var procesoPin = document.getElementById('procesoPin');
-var pasoEls = [].slice.call(document.querySelectorAll('#pasosList .paso'));
-var ringFill = document.getElementById('ringFill');
-var orbitShots = [].slice.call(document.querySelectorAll('.orbitShot'));
-var orbitNodes = [].slice.call(document.querySelectorAll('.orbitNode'));
-var orbitIndex = document.getElementById('orbitIndex');
-var procesoCounter = document.getElementById('procesoCounter');
-var procesoActive = -1;
-function setProcesoStep(idx){
-  if (idx === procesoActive) return;
-  procesoActive = idx;
-  pasoEls.forEach(function(el,i){ el.classList.toggle('on',i === idx); el.setAttribute('aria-hidden',i === idx ? 'false' : 'true'); });
-  orbitShots.forEach(function(el,i){ el.classList.toggle('on',i === idx); el.setAttribute('aria-hidden',i === idx ? 'false' : 'true'); });
-  orbitNodes.forEach(function(el,i){ el.classList.toggle('on',i === idx); el.setAttribute('aria-current',i === idx ? 'step' : 'false'); });
-  var label = '0' + (idx + 1);
-  if (orbitIndex) orbitIndex.textContent = label;
-  if (procesoCounter) procesoCounter.textContent = label + ' / 04';
-}
-function procesoTick(){
-  if (!procesoPin || !pasoEls.length) return;
-  var r = procesoPin.getBoundingClientRect();
-  var total = r.height - innerHeight;
-  var prog = total > 0 ? clamp(-r.top / total,0,1) : 0;
-  var idx = Math.min(pasoEls.length - 1,Math.floor(prog * pasoEls.length));
-  setProcesoStep(idx);
-  if (ringFill){
-    var off = (.75 - prog * .75).toFixed(3);
-    if (ringFill.__off !== off){ ringFill.__off = off; ringFill.style.strokeDashoffset = off; }
-  }
-}
-orbitNodes.forEach(function(node,i){
-  node.addEventListener('click',function(){
-    if (!procesoPin) return;
-    var top = procesoPin.getBoundingClientRect().top + scrollY;
-    var total = Math.max(0,procesoPin.offsetHeight - innerHeight);
-    var target = top + total * ((i + .5) / pasoEls.length);
-    scrollTo({ top:target,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-  });
-});
-procesoTick();
-
-/* ---------------------------------------------------------------
    8d · parallax suave · cifras, testimonios y garantías se mueven al scroll
    --------------------------------------------------------------- */
 var REDUCE_MOTION = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -501,8 +433,6 @@ var activeScrollAreas = new Map();
 var scrollAreas = [
   [sobreStory, sobreTick],
   [revelaPin, revelaTick],
-  [porquePin, porqueTick],
-  [procesoPin, procesoTick]
 ].filter(function(item){ return !!item[0]; });
 scrollAreas.forEach(function(item){ activeScrollAreas.set(item[0], true); });
 
@@ -603,10 +533,6 @@ if (form){
    --------------------------------------------------------------- */
 function pinToFinalStates(){
   document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in','settled'); });
-  pasoEls.forEach(function(el){ el.classList.add('on'); el.setAttribute('aria-hidden','false'); });
-  orbitShots.forEach(function(el,i){ el.classList.toggle('on',i === 0); el.setAttribute('aria-hidden',i === 0 ? 'false' : 'true'); });
-  orbitNodes.forEach(function(el,i){ el.classList.toggle('on',i === 0); el.setAttribute('aria-current',i === 0 ? 'step' : 'false'); });
-  if (ringFill) ringFill.style.strokeDashoffset = '0';
   if (holder){
     holdDone = true;
     holder.style.setProperty('--h','1');
@@ -897,13 +823,6 @@ function svgPlano(v){
          v.plano + pts + '</svg>';
 }
 
-function planoFicha(v){
-  if (!v.planoImagen) return svgPlano(v);
-  return '<picture class="planoMedia">' +
-    '<source srcset="' + v.planoImagen + '-512.webp 512w, ' + v.planoImagen + '-1024.webp 1024w" sizes="(max-width:700px) calc(100vw - 92px), 700px">' +
-    '<img class="planoImagen" src="' + v.planoImagen + '-512.webp" alt="' + v.planoAlt + '" width="1024" height="576" decoding="async">' +
-  '</picture>';
-}
 
 function crearEscenas(v){
   var escenas = [{
@@ -1005,11 +924,12 @@ function construirFicha(v){
     '<div class="showroomJourney" id="showroomJourney" style="height:' + (total * 92) + 'vh">' +
       '<section class="showroomStage" id="showroomStage" aria-label="Recorrido por ' + v.nombre + '">' +
         '<div class="showroomMedia">' + medios + '<div class="showroomShade" aria-hidden="true"></div><div class="showroomTitleDeck" aria-hidden="true">' + titulos + '</div></div>' +
-        '<aside class="showroomCopy">' +
-          '<div class="showroomStatus"><span>' + v.num + '</span><b><i id="showroomCurrent">01</i><em>/</em>' + String(total).padStart(2,'0') + '</b></div>' +
+          '<aside class="showroomCopy" id="showroomCopy">' +
+          '<div class="showroomStatus"><span>' + v.num + '</span><div class="showroomStatusSide"><b><i id="showroomCurrent">01</i><em>/</em>' + String(total).padStart(2,'0') + '</b><button class="showroomInfoToggle" id="showroomInfoToggle" type="button" aria-expanded="true" aria-controls="showroomCopy" aria-label="Ocultar la información para ver la foto completa"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3 L10.5 8 L5.5 13"/></svg></button></div></div>' +
           '<div class="showroomCopyDeck">' + copys + '</div>' +
           '<div class="showroomTimeline" aria-hidden="true"><span><i id="showroomProgress"></i></span><div>' + puntos + '</div></div>' +
-        '</aside>' +
+          '</aside>' +
+          '<button class="showroomInfoOpen" id="showroomInfoOpen" type="button" aria-label="Mostrar la información de este espacio">info <b aria-hidden="true">i</b></button>' +
       '</section>' +
     '</div>' +
   '</div>';
@@ -1129,6 +1049,16 @@ function cablearFicha(v){
   if (puntosPlano.length) activarPunto(0);
   document.getElementById('fichaAgendar').addEventListener('click', irAVisita);
   document.getElementById('cerrarFicha').addEventListener('click', cerrarFicha);
+  /* la ficha se pliega para contemplar la fotografía a cuadro completo */
+  var infoToggle = document.getElementById('showroomInfoToggle');
+  var infoOpen = document.getElementById('showroomInfoOpen');
+  function mostrarInfo(visible){
+    stage.classList.toggle('info-off', !visible);
+    infoToggle.setAttribute('aria-expanded', visible ? 'true' : 'false');
+    (visible ? infoToggle : infoOpen).focus({ preventScroll:true });
+  }
+  infoToggle.addEventListener('click', function(){ mostrarInfo(false); });
+  infoOpen.addEventListener('click', function(){ mostrarInfo(true); });
   precargar(1);
   /* Con la ficha abierta, el resto del recorrido baja en segundo plano, una
      escena a la vez: ningún giro rápido del scroll vuelve a esperar la red. */
@@ -1237,7 +1167,8 @@ document.addEventListener('keydown', function(e){
   if (e.key === 'Escape'){ cerrarFicha(); return; }
   if (e.key !== 'Tab') return;
   var focos = [].slice.call(panelficha.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])')).filter(function(el){
-    return !el.disabled && el.getAttribute('aria-hidden') !== 'true' && el.offsetParent !== null;
+    var infoPlegada = !!panelficha.querySelector('.showroomStage.info-off');
+    return !el.disabled && el.getAttribute('aria-hidden') !== 'true' && el.offsetParent !== null && !(infoPlegada && el.closest('.showroomCopy'));
   });
   if (!focos.length){ e.preventDefault(); panelficha.focus(); return; }
   var primero = focos[0];
