@@ -1433,6 +1433,129 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
   .fichaAgenda{display:block;padding:34px 26px}.fichaAgenda button{width:100%;margin-top:32px}
 }
 
+/* =====================================================================
+   SHOWROOM DE PROPIEDAD · el scroll sustituye a la galería
+   ================================================================== */
+.fullficha .velo{
+  background:rgba(10,9,8,.74);
+  backdrop-filter:blur(13px) saturate(.82);-webkit-backdrop-filter:blur(13px) saturate(.82)
+}
+.panelficha{
+  inset:clamp(20px,3vw,42px);width:auto;max-width:1560px;margin:0 auto;
+  border-radius:clamp(22px,2.2vw,34px);background:#141311;color:#F5F1EC;
+  scrollbar-width:none;overscroll-behavior:contain;outline:none;
+  opacity:0;transform:translateY(18px) scale(.985);
+  transition:opacity .5s var(--ease-soft),transform .72s var(--ease)
+}
+.panelficha::-webkit-scrollbar{display:none}
+.fullficha.abierta .panelficha{opacity:1;transform:none}
+.showroomWrap{position:relative;min-height:100%;padding:0;background:#141311}
+.showroomWrap>.showroomClose{
+  position:sticky;top:18px;right:auto;margin:18px 18px -64px auto;z-index:40;
+  width:46px;height:46px;background:rgba(18,16,14,.58);border-color:rgba(255,255,255,.3);
+  box-shadow:0 10px 32px rgba(0,0,0,.18)
+}
+.showroomJourney{position:relative;min-height:360vh}
+.showroomStage{
+  --journey:0;position:sticky;top:0;height:calc(100dvh - clamp(40px,6vw,84px));
+  min-height:560px;overflow:hidden;isolation:isolate;background:#1B1917
+}
+.showroomMedia{position:absolute;inset:0;overflow:hidden;background:#211E1B}
+.showroomFrame{position:absolute;inset:0;margin:0;opacity:0;transform:scale(1.035);z-index:0;
+  transition:opacity .72s var(--ease-soft),transform 1.15s var(--ease);pointer-events:none}
+.showroomFrame.active{opacity:1;transform:scale(1);z-index:1}
+.showroomFrame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;
+  filter:saturate(.91) contrast(1.025);background:#211E1B}
+.showroomFrame.is-plan{background:#EEEAE4}
+.showroomFrame.is-plan img{box-sizing:border-box;object-fit:contain;padding:clamp(34px,5vw,78px) clamp(410px,34vw,520px) clamp(34px,5vw,78px) clamp(34px,5vw,78px);filter:none;background:#EEEAE4}
+.showroomSvgPlan{height:100%;box-sizing:border-box;padding:clamp(42px,6vw,92px) clamp(430px,35vw,540px) clamp(42px,6vw,92px) clamp(42px,6vw,92px);display:grid;place-items:center;background:#EEEAE4;color:#3B3834}
+.showroomSvgPlan .plano{width:100%;height:100%;max-height:680px;color:#595550}
+.showroomSvgPlan .relleno{fill:rgba(35,33,32,.035)}
+.showroomSvgPlan .pt circle{fill:#F8F5EF;stroke:#9A6B43}.showroomSvgPlan .pt text{fill:#6D482D}
+.showroomSvgPlan .pt:hover circle,.showroomSvgPlan .pt:focus circle,.showroomSvgPlan .pt.activa circle{fill:#9A6B43}
+.showroomSvgPlan .pt:hover text,.showroomSvgPlan .pt:focus text,.showroomSvgPlan .pt.activa text{fill:#fff}
+.showroomShade{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,rgba(8,7,6,.34) 0%,rgba(8,7,6,.04) 48%,rgba(8,7,6,.26) 100%),linear-gradient(0deg,rgba(8,7,6,.62) 0%,transparent 46%)}
+.showroomTitleDeck{position:absolute;z-index:3;left:clamp(26px,4vw,62px);right:clamp(430px,35vw,540px);bottom:clamp(28px,4.5vw,66px);height:clamp(92px,10vw,150px);pointer-events:none}
+.showroomTitle{position:absolute;inset:auto 0 0;margin:0;color:#fff;opacity:0;transform:translate3d(0,24px,0);transition:opacity .44s var(--ease-soft),transform .72s var(--ease)}
+.showroomTitle.active{opacity:1;transform:none}
+.showroomTitle span{display:block;margin-bottom:10px;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.showroomTitle strong{display:block;max-width:10ch;font-family:var(--display);font-size:clamp(54px,7vw,118px);font-weight:200;line-height:.76;letter-spacing:-.07em;text-transform:lowercase;text-wrap:balance;text-shadow:0 3px 24px rgba(0,0,0,.26)}
+.showroomStage.is-plan .showroomShade{background:linear-gradient(90deg,rgba(238,234,228,.02) 0%,rgba(238,234,228,.04) 66%,rgba(20,18,16,.12) 100%)}
+.showroomStage.is-plan .showroomTitle{color:#272421}.showroomStage.is-plan .showroomTitle span{color:#766F68}.showroomStage.is-plan .showroomTitle strong{text-shadow:none}
+.showroomCopy{
+  position:absolute;z-index:7;top:clamp(72px,7vh,92px);right:clamp(22px,2.4vw,38px);bottom:clamp(22px,2.4vw,38px);
+  width:min(390px,31vw);box-sizing:border-box;padding:clamp(22px,2.4vw,34px);
+  display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:22px;
+  background:rgba(18,16,14,.83);box-shadow:0 28px 80px rgba(0,0,0,.24);
+  backdrop-filter:blur(20px) saturate(1.05);-webkit-backdrop-filter:blur(20px) saturate(1.05)
+}
+.showroomStatus{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.16);flex:none}
+.showroomStatus>span{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.58)}
+.showroomStatus>b{display:flex;align-items:baseline;gap:7px;font-family:var(--display);font-size:17px;font-weight:300;color:#fff}
+.showroomStatus i,.showroomStatus em{font-style:normal}.showroomStatus em{color:rgba(255,255,255,.34)}
+.showroomCopyDeck{position:relative;min-height:0;flex:1;margin:clamp(22px,3vh,34px) 0 18px}
+.showroomSceneCopy{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:translate3d(22px,0,0);pointer-events:none;transition:opacity .42s var(--ease-soft),transform .68s var(--ease)}
+.showroomSceneCopy.active{opacity:1;transform:none;pointer-events:auto}
+.showroomKicker{display:block;font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--sun)}
+.showroomSceneCopy h3{margin:14px 0 0;max-width:10ch;font-family:var(--display);font-size:clamp(31px,3.2vw,47px);font-weight:250;line-height:.9;letter-spacing:-.052em;text-transform:lowercase;text-wrap:balance}
+.showroomSceneCopy>p{margin:20px 0 0;max-width:39ch;font-size:13.5px;line-height:1.62;color:rgba(245,241,236,.68);text-wrap:pretty}
+.showroomCaption{margin-top:auto!important;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);font-size:10px!important;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,241,236,.48)!important}
+.showroomSpecs{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:auto 0 0;border-top:1px solid rgba(255,255,255,.15)}
+.showroomSpecs div{padding:14px 0 10px;border-bottom:1px solid rgba(255,255,255,.15)}
+.showroomSpecs div:nth-child(odd){padding-right:12px}.showroomSpecs div:nth-child(even){padding-left:12px;border-left:1px solid rgba(255,255,255,.15)}
+.showroomSpecs dt{font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,241,236,.42)}
+.showroomSpecs dd{margin:7px 0 0;font-family:var(--display);font-size:clamp(17px,1.6vw,23px);font-weight:300;line-height:1.08;color:#fff}
+.showroomPlanNote{margin:auto 0 16px!important;padding:14px;border:1px solid rgba(255,255,255,.13);border-radius:14px;background:rgba(255,255,255,.045)}
+.showroomPlanNote b,.showroomPlanNote span{display:block}.showroomPlanNote b{font-size:11px;font-weight:600;color:#fff}.showroomPlanNote span{margin-top:6px;font-size:11.5px;line-height:1.45;color:rgba(245,241,236,.62)}
+.showroomFinal{margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.15)}
+.showroomFinal>span{display:block;margin-bottom:12px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(245,241,236,.5)}
+.showroomFinal button{width:100%;min-height:52px;padding:7px 7px 7px 17px;display:flex;align-items:center;justify-content:space-between;gap:18px;border:0;border-radius:999px;background:#F2EEE8;color:#25221F;font:600 12px var(--sans);cursor:pointer;transition:transform .35s var(--ease),background .35s var(--ease-soft)}
+.showroomFinal button:hover{transform:translateY(-2px);background:#fff}.showroomFinal button:active{transform:scale(.985)}
+.showroomFinal button b{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#9A6B43;color:#fff;font-size:15px;font-weight:400;transition:transform .4s var(--ease)}
+.showroomFinal button:hover b{transform:rotate(45deg)}
+.showroomTimeline{display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;flex:none}
+.showroomTimeline>span{position:relative;height:1px;overflow:hidden;background:rgba(255,255,255,.17)}
+.showroomTimeline>span i{position:absolute;inset:0;background:var(--sun);transform:scaleX(0);transform-origin:left center;will-change:transform}
+.showroomTimeline>div{display:flex;gap:5px}.showroomTimeline>div i{display:block;width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.22);transition:background .32s var(--ease-soft),transform .32s var(--ease)}
+.showroomTimeline>div i.active{background:var(--sun);transform:scale(1.25)}
+
+@media (max-width:900px){
+  .panelficha{inset:10px;border-radius:26px}
+  .showroomWrap>.showroomClose{top:14px;margin:14px 14px -60px auto}
+  .showroomStage{height:calc(100dvh - 20px);min-height:600px;display:flex;flex-direction:column;background:#141311}
+  .showroomMedia{position:relative;inset:auto;width:100%;height:min(46svh,470px);flex:none;border-radius:26px 26px 0 0}
+  .showroomFrame img{object-fit:contain;background:#1C1A18}
+  .showroomFrame.is-plan img,.showroomSvgPlan{padding:18px 22px;background:#EEEAE4}
+  .showroomTitleDeck{left:22px;right:74px;bottom:20px;height:88px}
+  .showroomTitle strong{font-size:clamp(44px,10vw,72px);line-height:.82}.showroomTitle span{margin-bottom:7px;font-size:8px}
+  .showroomCopy{position:relative;inset:auto;width:100%;flex:1;min-height:0;padding:24px 22px 20px;border:0;border-radius:0;background:#141311;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .showroomStatus{padding-bottom:13px}.showroomCopyDeck{margin:18px 0 14px}
+  .showroomSceneCopy h3{font-size:clamp(30px,6.5vw,43px)}.showroomSceneCopy>p{margin-top:14px;font-size:13px;line-height:1.5}
+  .showroomSpecs div{padding-top:10px;padding-bottom:8px}.showroomSpecs dd{font-size:18px}
+  .showroomCaption{padding-top:12px}.showroomFinal{padding-top:13px}.showroomPlanNote{margin:auto 0 10px!important;padding:10px 12px}
+}
+/* el video vertical se muestra completo en celular, sin recorte, sobre un fondo a juego */
+@media (max-width:900px){
+  .horaFilm{object-fit:contain;object-position:center;background:#100E0D}
+  .holder{background:radial-gradient(circle at 50% 42%,#28221D 0%,#100E0D 64%)}
+}
+@media (max-width:600px){
+  .panelficha{inset:8px;border-radius:24px}
+  .showroomStage{height:calc(100dvh - 16px);min-height:560px}
+  .showroomMedia{height:min(34svh,290px);min-height:210px;border-radius:24px 24px 0 0}
+  .showroomTitleDeck{left:18px;right:66px;bottom:16px;height:76px}
+  .showroomTitle strong{font-size:clamp(39px,12vw,58px)}
+  .showroomCopy{padding:20px 18px 16px}.showroomStatus>span{font-size:8px}.showroomStatus>b{font-size:15px}
+  .showroomCopyDeck{margin:15px 0 12px}.showroomKicker{font-size:8px}.showroomSceneCopy h3{margin-top:10px;font-size:clamp(29px,9vw,38px)}
+  .showroomSceneCopy>p{font-size:12.5px;line-height:1.46}.showroomSpecs dd{font-size:16px}.showroomSpecs dt{font-size:7.5px}
+  .showroomFinal button{min-height:48px}.showroomTimeline{gap:10px}
+}
+@media (max-height:680px) and (max-width:900px){
+  .showroomMedia{height:38svh;min-height:180px}.showroomCopy{padding-top:16px}.showroomCopyDeck{margin-top:12px}
+  .showroomSceneCopy h3{font-size:28px}.showroomSceneCopy>p{font-size:11.5px}.showroomSpecs div{padding-top:7px;padding-bottom:6px}.showroomCaption{display:none}
+}
+
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{
@@ -1453,6 +1576,8 @@ body.motion-ready .sobre.story-on .aboutNotes p:nth-child(2){animation-delay:.96
   .procesoCopy{margin-top:64px}
   .proceso .pasos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 56px;min-height:0}
   .proceso .paso{grid-area:auto;opacity:1;visibility:visible;transform:none;pointer-events:auto;justify-content:flex-start}
+  .showroomFrame,.showroomTitle,.showroomSceneCopy{transition:none}
+  .showroomTimeline>div i{transition:none}
   .proceso .paso h3{font-size:clamp(38px,4vw,58px)}
   .procesoCta{margin-top:56px}
   .gcard,.cifras-row div,.arcoLado{transform:none !important}
@@ -1604,7 +1729,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
       </div>
       <div class="obrasStatement">
         <h2>Tres casas. Tres maneras de habitar el paisaje.</h2>
-        <p>Pasa el cursor para encender la casa. Haz clic para entrar y revisar galería, información, plano y disponibilidad.</p>
+        <p>Haz clic para entrar. El recorrido avanza con tu scroll: exterior, interiores, plano y visita privada.</p>
         <a href="#agendar">Agendar visita <span aria-hidden="true">↗</span></a>
       </div>
     </div>
@@ -1687,7 +1812,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
  <div class="revelaPin" id="revelaPin">
   <div class="holder" id="holder">
     <video class="horaFilm" id="horaVideo" muted playsinline preload="none"
-           data-poster="assets/hero-poster-1280.webp" aria-hidden="true" tabindex="-1">
+           data-poster="assets/hero-poster-1280.webp" data-poster-mobile="assets/hero-poster-movil.webp" aria-hidden="true" tabindex="-1">
       <source data-src="assets/hero-scrub-movil.mp4" type="video/mp4" media="(max-width:900px)">
       <source data-src="assets/hero-scrub.mp4" type="video/mp4">
     </video>
@@ -1960,7 +2085,7 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 
 </main>
 
-<!-- ============ LA FICHA A PANTALLA COMPLETA ============ -->
+<!-- ============ SHOWROOM DE PROPIEDAD ============ -->
 <div class="fullficha" id="fullficha" role="dialog" aria-modal="true" aria-labelledby="fichaNombre">
   <div class="velo" id="velo"></div>
   <div class="panelficha" id="panelficha" tabindex="-1"></div>

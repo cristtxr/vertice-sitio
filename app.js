@@ -330,16 +330,29 @@ var dfs = [].slice.call(document.querySelectorAll('.df'));
 var horaVideo = document.getElementById('horaVideo');
 var horaPendingTime = null;
 var holdDone = false;
+var ahorrarDatosHora = !!(navigator.connection && navigator.connection.saveData);
+
+function posterHora(){
+  if (!horaVideo) return '';
+  return matchMedia('(max-width:900px)').matches
+    ? (horaVideo.dataset.posterMobile || horaVideo.dataset.poster)
+    : horaVideo.dataset.poster;
+}
+if (horaVideo) horaVideo.poster = posterHora();
 
 /* El video conserva exactamente el recorrido, pero no compite con el hero por
    ancho de banda ni por decodificación hasta que el lector se acerca a él. */
 function cargarVideoHora(){
-  if (!horaVideo || horaVideo.dataset.loaded === 'true') return;
+  if (!horaVideo || horaVideo.dataset.loaded) return;
+  horaVideo.poster = posterHora();
+  if (ahorrarDatosHora || matchMedia('(prefers-reduced-motion: reduce)').matches){
+    horaVideo.dataset.loaded = 'poster';
+    return;
+  }
   horaVideo.dataset.loaded = 'true';
   [].slice.call(horaVideo.querySelectorAll('source[data-src]')).forEach(function(source){
     source.src = source.dataset.src;
   });
-  horaVideo.poster = horaVideo.dataset.poster;
   horaVideo.preload = 'metadata';
   horaVideo.load();
 }
@@ -642,9 +655,9 @@ var VILLAS = {
     relato: 'La casa no termina en el vidrio. La cubierta, la terraza y el jardín forman una sola estancia para vivir adentro y afuera con la misma comodidad.',
     luces: [[31,31,15,18],[51,33,13,19],[75,34,24,28],[39,59,13,17],[61,58,17,18],[81,59,22,18]],
     interiores: [
-      { src:'assets/casa-palmar-sala', pie:'Sala de doble altura abierta al jardín' },
-      { src:'assets/casa-palmar-terraza', pie:'Terraza cubierta y comedor exterior' },
-      { src:'assets/casa-palmar-piscina', pie:'Estancia exterior frente a la piscina' }
+      { src:'assets/casa-palmar-sala', tipo:'interior · área social', titulo:'sala de doble altura', pie:'Sala de doble altura abierta al jardín', descripcion:'La doble altura concentra la luz y abre la estancia principal al jardín. El vidrio desaparece visualmente para que interior y paisaje se lean como un solo espacio.' },
+      { src:'assets/casa-palmar-terraza', tipo:'exterior · terraza', titulo:'comedor al aire libre', pie:'Terraza cubierta y comedor exterior', descripcion:'La cubierta prolonga la casa hacia el jardín y protege el comedor exterior. Es el punto de encuentro entre la cocina, la sala y la vegetación.' },
+      { src:'assets/casa-palmar-piscina', tipo:'exterior · agua', titulo:'estancia frente al agua', pie:'Estancia exterior frente a la piscina', descripcion:'La piscina cierra la secuencia social de la casa. Su borde acompaña la terraza y mantiene el jardín como fondo permanente.' }
     ],
     plano:
       '<rect class="relleno" x="38" y="54" width="324" height="174" rx="3"/>' +
@@ -669,9 +682,9 @@ var VILLAS = {
     relato: 'El paisaje funciona como fachada principal. La alberca, la sala y el pabellón exterior comparten un mismo horizonte sin bloquearse entre sí.',
     luces: [[39,26,14,14],[55,26,12,14],[72,43,16,16],[49,44,14,14]],
     interiores: [
-      { src:'assets/casa-mirador-sala', pie:'Sala principal frente al valle' },
-      { src:'assets/casa-mirador-cocina', pie:'Cocina de madera, piedra y luz indirecta' },
-      { src:'assets/casa-mirador-terraza', pie:'Terraza y alberca abiertas a la montaña' }
+      { src:'assets/casa-mirador-sala', tipo:'interior · estancia', titulo:'sala frente al valle', pie:'Sala principal frente al valle', descripcion:'El ventanal mantiene el horizonte completo dentro de la estancia. La distribución deja libre la visual y separa con claridad las circulaciones privadas.' },
+      { src:'assets/casa-mirador-cocina', tipo:'interior · cocina', titulo:'madera, piedra y luz', pie:'Cocina de madera, piedra y luz indirecta', descripcion:'La cocina combina superficies minerales y carpintería cálida. La iluminación indirecta acompaña el trabajo sin competir con la vista exterior.' },
+      { src:'assets/casa-mirador-terraza', tipo:'exterior · terraza', titulo:'un borde sobre la montaña', pie:'Terraza y alberca abiertas a la montaña', descripcion:'La alberca prolonga la línea del valle y conecta la terraza con el pabellón exterior. Aquí la casa se abre por completo al paisaje.' }
     ],
     plano:
       '<path class="relleno" d="M34 62 H248 V98 H364 V222 H162 V246 H34 Z"/>' +
@@ -737,15 +750,15 @@ var VILLAS = {
     nombre: 'casa corte', lugar: 'Costa Careyes, Jalisco', num: 'N°008 · 2023',
     precio: 'USD 980,000', m2: '265 m²', rec: '3 recámaras', estado: 'Reservado', libre: false,
     foto: 'assets/obra-corte',
-    planoImagen: 'assets/plano-mirador-corte',
+    planoImagen: '',
     planoAlt: 'Vista axonométrica de la distribución de Casa Corte.',
     luces: [[78,44,22,30],[66,50,12,18]],
     detalle: 'Concreto aparente, madera y bosque. Casa Corte trabaja con vacíos precisos para que la luz revele la estructura a lo largo del día.',
     relato: 'La escalera, la cocina y la recámara nacen de una misma lógica material. Pocas piezas, bien resueltas, dejan que el bosque sea el acabado principal.',
     interiores: [
-      { src:'assets/casa-corte-interior', pie:'Escalera de concreto y estancia frente al bosque', compact:true },
-      { src:'assets/casa-corte-cocina', pie:'Cocina integrada bajo la escalera', compact:true },
-      { src:'assets/casa-corte-recamara', pie:'Recámara abierta a la vegetación', compact:true }
+      { src:'assets/casa-corte-interior', tipo:'interior · circulación', titulo:'la escalera como estructura', pie:'Escalera de concreto y estancia frente al bosque', descripcion:'La escalera de concreto organiza la casa y enmarca la estancia. Su peso contrasta con la apertura total hacia el bosque.', compact:true },
+      { src:'assets/casa-corte-cocina', tipo:'interior · cocina', titulo:'todo bajo una pieza', pie:'Cocina integrada bajo la escalera', descripcion:'La cocina aprovecha el vacío bajo la escalera para reunir almacenamiento, preparación y circulación en un gesto continuo.', compact:true },
+      { src:'assets/casa-corte-recamara', tipo:'interior · descanso', titulo:'dormir entre vegetación', pie:'Recámara abierta a la vegetación', descripcion:'La recámara se abre al verde y conserva una materialidad silenciosa. El paisaje aporta profundidad sin perder resguardo.', compact:true }
     ],
     plano:
       '<rect class="relleno" x="40" y="66" width="180" height="140"/>' +
@@ -871,6 +884,7 @@ var fullficha = document.getElementById('fullficha');
 var panelficha = document.getElementById('panelficha');
 var velo = document.getElementById('velo');
 var ultimaTarjeta = null;
+var limpiarFichaActual = null;
 var reducido = function(){ return matchMedia('(prefers-reduced-motion: reduce)').matches; };
 
 function svgPlano(v){
@@ -891,138 +905,255 @@ function planoFicha(v){
   '</picture>';
 }
 
-function construirFicha(v){
-  var imgs = v.interiores.length ? v.interiores : [{ src: v.foto, pie: 'Vista exterior' }];
-  var visor = imgs.map(function(im, i){
-    var srcset = im.src + '-400.webp 400w, ' + im.src + '-900.webp 900w' + (im.compact ? '' : ', ' + im.src + '-1600.webp 1600w');
-    var source = i === 0
-      ? 'src="' + im.src + '-900.webp" srcset="' + srcset + '" sizes="(max-width: 700px) 92vw, 960px"'
-      : 'data-src="' + im.src + '-900.webp" data-srcset="' + srcset + '" data-sizes="(max-width: 700px) 92vw, 960px"';
-    return '<img ' + source +
-           ' alt="' + im.pie + '" class="' + (i === 0 ? 'viva' : '') + '" data-i="' + i + '"' +
-           ' decoding="async">';
-  }).join('');
+function crearEscenas(v){
+  var escenas = [{
+    tipo: 'exterior · ' + v.estado.toLowerCase(),
+    titulo: v.nombre,
+    descripcion: v.detalle,
+    pie: v.lugar,
+    src: v.foto,
+    alt: 'Vista exterior de ' + v.nombre,
+    clase: 'is-exterior'
+  }];
+  v.interiores.forEach(function(im){
+    escenas.push({
+      tipo: im.tipo || 'recorrido interior',
+      titulo: im.titulo || im.pie,
+      descripcion: im.descripcion || im.pie,
+      pie: im.pie,
+      src: im.src,
+      alt: im.pie + ' en ' + v.nombre,
+      compact: !!im.compact,
+      clase: 'is-photo'
+    });
+  });
+  escenas.push({
+    tipo: 'distribución · plano',
+    titulo: 'la casa por dentro',
+    descripcion: v.planoImagen
+      ? 'La vista axonométrica reúne niveles, circulaciones y relaciones entre los espacios para que puedas evaluar la casa antes de visitarla.'
+      : 'El plano reúne orientación, circulaciones y puntos clave para entender cómo se habita la casa.',
+    pie: 'Plano arquitectónico de ' + v.nombre,
+    src: v.planoImagen || '',
+    alt: v.planoAlt || 'Plano arquitectónico de ' + v.nombre,
+    clase: 'is-plan',
+    plano: true
+  });
+  return escenas;
+}
 
-  return '' +
-  '<div class="fichaWrap">' +
-    '<button class="cerrar" id="cerrarFicha" type="button" aria-label="Cerrar">' +
-      '<svg viewBox="0 0 16 16"><path d="M2 2 L14 14 M14 2 L2 14"/></svg></button>' +
-    '<section class="fichaHero">' +
-      '<img src="' + v.foto + '-1600.webp" srcset="' + v.foto + '-900.webp 900w, ' + v.foto + '-1600.webp 1600w" sizes="100vw" alt="Vista exterior de ' + v.nombre + '" decoding="async">' +
-      '<div class="fichaHeroCopy"><div><span class="glass">' + v.num + '</span><h2 id="fichaNombre">' + v.nombre + '</h2></div><p>' + v.lugar + '<br>' + v.estado + '</p></div>' +
-    '</section>' +
-    '<div class="fichaBody">' +
-      '<section class="fichaInfo">' +
-        '<div class="fichaInfoLead"><span>la residencia</span><h3>Todo lo esencial, antes de decidir.</h3><p>' + (v.detalle || 'Arquitectura, materialidad y paisaje se organizan para crear una casa clara, habitable y duradera.') + '</p></div>' +
-        '<dl class="fichaSpecs">' +
-          '<div><dt>Precio</dt><dd>' + v.precio + '</dd></div>' +
-          '<div><dt>Superficie</dt><dd>' + v.m2 + '</dd></div>' +
-          '<div><dt>Programa</dt><dd>' + v.rec + '</dd></div>' +
-          '<div><dt>Estado</dt><dd>' + v.estado + '</dd></div>' +
-        '</dl>' +
+function imagenEscena(escena, i, v){
+  if (escena.plano && !escena.src){
+    return '<figure class="showroomFrame is-plan' + (i === 0 ? ' active' : '') + '" data-scene="' + i + '" aria-hidden="' + (i === 0 ? 'false' : 'true') + '"><div class="showroomSvgPlan">' + svgPlano(v) + '</div></figure>';
+  }
+  if (escena.plano){
+    return '<figure class="showroomFrame is-plan" data-scene="' + i + '" aria-hidden="true">' +
+      '<img data-src="' + escena.src + '-1024.webp" data-srcset="' + escena.src + '-512.webp 512w, ' + escena.src + '-1024.webp 1024w" data-sizes="(max-width:700px) calc(100vw - 48px), 980px" alt="' + escena.alt + '" width="1024" height="576" decoding="async">' +
+    '</figure>';
+  }
+  var srcset = escena.src + '-400.webp 400w, ' + escena.src + '-900.webp 900w' + (escena.compact ? '' : ', ' + escena.src + '-1600.webp 1600w');
+  var sizes = '(max-width:700px) calc(100vw - 16px), (max-width:1200px) calc(100vw - 48px), 1500px';
+  var fuente = i === 0
+    ? 'src="' + escena.src + '-900.webp" srcset="' + srcset + '" sizes="' + sizes + '"'
+    : 'data-src="' + escena.src + '-900.webp" data-srcset="' + srcset + '" data-sizes="' + sizes + '"';
+  return '<figure class="showroomFrame ' + escena.clase + (i === 0 ? ' active' : '') + '" data-scene="' + i + '" aria-hidden="' + (i === 0 ? 'false' : 'true') + '">' +
+    '<img ' + fuente + ' alt="' + escena.alt + '" width="1600" height="900" decoding="async">' +
+  '</figure>';
+}
+
+function copyEscena(escena, i, v, total){
+  var extra = '';
+  if (i === 0){
+    extra = '<dl class="showroomSpecs">' +
+      '<div><dt>Precio</dt><dd>' + v.precio + '</dd></div>' +
+      '<div><dt>Superficie</dt><dd>' + v.m2 + '</dd></div>' +
+      '<div><dt>Programa</dt><dd>' + v.rec + '</dd></div>' +
+      '<div><dt>Estado</dt><dd>' + v.estado + '</dd></div>' +
+    '</dl>';
+  } else if (escena.plano){
+    var notaPlano = !v.planoImagen && v.puntos && v.puntos.length
+      ? '<p class="showroomPlanNote" id="showroomPlanNote"><b>' + v.puntos[0].t + '</b><span>' + v.puntos[0].n + '</span></p>'
+      : '';
+    extra = notaPlano + '<div class="showroomFinal">' +
+      '<span>Visita privada · 60 min</span>' +
+      '<button id="fichaAgendar" type="button">Conócela en persona <b aria-hidden="true">↗</b></button>' +
+    '</div>';
+  } else {
+    extra = '<p class="showroomCaption">' + escena.pie + '</p>';
+  }
+  return '<article class="showroomSceneCopy' + (i === 0 ? ' active' : '') + '" data-scene="' + i + '" aria-hidden="' + (i === 0 ? 'false' : 'true') + '">' +
+    '<span class="showroomKicker">' + escena.tipo + '</span>' +
+    '<h3>' + escena.titulo + '</h3>' +
+    '<p>' + escena.descripcion + '</p>' + extra +
+  '</article>';
+}
+
+function construirFicha(v){
+  var escenas = crearEscenas(v);
+  var total = escenas.length;
+  var medios = escenas.map(function(escena, i){ return imagenEscena(escena, i, v); }).join('');
+  var titulos = escenas.map(function(escena, i){
+    return '<p class="showroomTitle' + (i === 0 ? ' active' : '') + '" data-scene="' + i + '"><span>' + escena.tipo + '</span><strong' + (i === 0 ? ' id="fichaNombre"' : '') + '>' + escena.titulo + '</strong></p>';
+  }).join('');
+  var copys = escenas.map(function(escena, i){ return copyEscena(escena, i, v, total); }).join('');
+  var puntos = escenas.map(function(_, i){ return '<i class="' + (i === 0 ? 'active' : '') + '" data-scene="' + i + '"></i>'; }).join('');
+
+  return '<div class="fichaWrap showroomWrap">' +
+    '<button class="cerrar showroomClose" id="cerrarFicha" type="button" aria-label="Cerrar recorrido de ' + v.nombre + '">' +
+      '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2 L14 14 M14 2 L2 14"/></svg>' +
+    '</button>' +
+    '<div class="showroomJourney" id="showroomJourney" style="height:' + (total * 92) + 'vh">' +
+      '<section class="showroomStage" id="showroomStage" aria-label="Recorrido por ' + v.nombre + '">' +
+        '<div class="showroomMedia">' + medios + '<div class="showroomShade" aria-hidden="true"></div><div class="showroomTitleDeck" aria-hidden="true">' + titulos + '</div></div>' +
+        '<aside class="showroomCopy">' +
+          '<div class="showroomStatus"><span>' + v.num + '</span><b><i id="showroomCurrent">01</i><em>/</em>' + String(total).padStart(2,'0') + '</b></div>' +
+          '<div class="showroomCopyDeck">' + copys + '</div>' +
+          '<div class="showroomTimeline" aria-hidden="true"><span><i id="showroomProgress"></i></span><div>' + puntos + '</div></div>' +
+        '</aside>' +
       '</section>' +
-      '<section class="fichaGallery" aria-label="Galería de ' + v.nombre + '">' +
-        '<div class="fichaSectionHead"><div><span>recorrido interior</span><h3>la galería</h3></div><b class="galleryCounter" id="galleryCounter">01 / ' + String(imgs.length).padStart(2,'0') + '</b></div>' +
-        '<div class="visor" id="visor">' + visor +
-          '<button class="galleryNav galleryPrev" type="button" aria-label="Imagen anterior"><span>→</span></button>' +
-          '<button class="galleryNav galleryNext" type="button" aria-label="Imagen siguiente"><span>→</span></button>' +
-        '</div>' +
-        '<span class="pie" id="pieVisor">' + imgs[0].pie + '</span>' +
-      '</section>' +
-      '<section class="fichaRelato"><span>idea de proyecto</span><blockquote>' + (v.relato || v.detalle) + '</blockquote></section>' +
-      '<section class="fichaPlanoWrap">' +
-        '<div class="fichaSectionHead"><div><span>distribución</span><h3>plano arquitectónico</h3></div></div>' +
-        '<div class="fichaPlanoGrid"><div class="planoCaja' + (v.planoImagen ? ' planoImagenCaja' : '') + '">' + planoFicha(v) +
-          '<p class="notaPunto" id="notaPunto"><b>' + (v.planoImagen ? 'Vista de distribución.' : v.puntos[0].t) + '</b>' + (v.planoImagen ? 'Una lectura espacial de la casa, sus niveles y su relación con el terreno.' : v.puntos[0].n) + '</p>' +
-        '</div><aside class="fichaPlanoAside"><h4>' + (v.planoImagen ? 'La casa, vista por dentro.' : 'Explora los puntos de interés.') + '</h4><p>' + (v.planoImagen ? 'Esta vista axonométrica permite entender la distribución, la altura de los espacios y cómo se conectan las áreas de la residencia.' : 'Selecciona cada número para entender la distribución, la orientación y las decisiones que definen esta casa.') + '</p></aside></div>' +
-      '</section>' +
-      '<section class="fichaAgenda"><div><span>siguiente paso</span><h3>Conoce la casa en persona.</h3></div><button id="fichaAgendar" type="button">Agendar visita <b aria-hidden="true">↗</b></button></section>' +
     '</div>' +
   '</div>';
 }
 
 function cablearFicha(v){
-  var visor = document.getElementById('visor');
-  var pie = document.getElementById('pieVisor');
-  var imgs = [].slice.call(visor.querySelectorAll('img'));
-  var lista = v.interiores.length ? v.interiores : [{ src: v.foto, pie: 'Vista exterior' }];
+  var escenas = crearEscenas(v);
+  var journey = document.getElementById('showroomJourney');
+  var stage = document.getElementById('showroomStage');
+  var frames = [].slice.call(panelficha.querySelectorAll('.showroomFrame'));
+  var copies = [].slice.call(panelficha.querySelectorAll('.showroomSceneCopy'));
+  var titles = [].slice.call(panelficha.querySelectorAll('.showroomTitle'));
+  var dots = [].slice.call(panelficha.querySelectorAll('.showroomTimeline i[data-scene]'));
+  var current = document.getElementById('showroomCurrent');
+  var progressLine = document.getElementById('showroomProgress');
+  var activeIndex = 0;
+  var scrollFrame = null;
+  var idleId = null;
 
-  var counter = document.getElementById('galleryCounter');
-  var activeImage = 0;
-  var pendingImage = null;
-  function cargarImagen(im){
-    if (!im || !im.dataset.src) return;
-    im.src = im.dataset.src;
-    im.srcset = im.dataset.srcset;
-    im.sizes = im.dataset.sizes;
-    delete im.dataset.src;
-    delete im.dataset.srcset;
-    delete im.dataset.sizes;
-  }
-  function precargarSiguiente(i){
-    var next = imgs[(i + imgs.length) % imgs.length];
-    var idle = window.requestIdleCallback
-      ? function(fn){ window.requestIdleCallback(fn, { timeout:900 }); }
-      : function(fn){ setTimeout(fn, 180); };
-    idle(function(){ cargarImagen(next); });
-  }
-  function mostrarImagen(i){
-    var siguiente = (i + imgs.length) % imgs.length;
-    var imagen = imgs[siguiente];
-    if (siguiente === activeImage || pendingImage === imagen) return;
-    pendingImage = imagen;
-    cargarImagen(imagen);
-    function revelar(){
-      if (pendingImage !== imagen) return;
-      pendingImage = null;
-      activeImage = siguiente;
-      imgs.forEach(function(im){ im.classList.toggle('viva', +im.dataset.i === activeImage); });
-      pie.textContent = lista[activeImage].pie;
-      counter.textContent = String(activeImage + 1).padStart(2,'0') + ' / ' + String(imgs.length).padStart(2,'0');
-      precargarSiguiente(activeImage + 1);
+  function cargarEscena(i, callback){
+    var frame = frames[i];
+    if (!frame){ if (callback) callback(); return; }
+    var img = frame.querySelector('img');
+    if (!img){ if (callback) callback(); return; }
+    if (img.dataset.src){
+      img.src = img.dataset.src;
+      if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+      if (img.dataset.sizes) img.sizes = img.dataset.sizes;
+      delete img.dataset.src;
+      delete img.dataset.srcset;
+      delete img.dataset.sizes;
     }
-    if (imagen.complete && imagen.naturalWidth) revelar();
-    else imagen.addEventListener('load', revelar, { once:true });
+    if (!callback) return;
+    if (img.complete && img.naturalWidth) callback();
+    else img.addEventListener('load', callback, { once:true });
   }
-  panelficha.querySelector('.galleryPrev').addEventListener('click',function(){ mostrarImagen(activeImage - 1); });
-  panelficha.querySelector('.galleryNext').addEventListener('click',function(){ mostrarImagen(activeImage + 1); });
-  precargarSiguiente(activeImage + 1);
 
-  var nota = document.getElementById('notaPunto');
-  var grupos = [].slice.call(panelficha.querySelectorAll('.pt'));
-  if (!nota || !grupos.length) {
-    document.getElementById('fichaAgendar').addEventListener('click',function(){
-      cerrarFicha();
-      setTimeout(function(){
-        var destino = document.getElementById('agendar');
-        if (destino) destino.scrollIntoView({ behavior: reducido() ? 'auto' : 'smooth', block:'start' });
-      },560);
-    });
-    document.getElementById('cerrarFicha').addEventListener('click', cerrarFicha);
-    return;
+  function precargar(i){
+    if (i < 0 || i >= frames.length) return;
+    if (window.requestIdleCallback){
+      idleId = window.requestIdleCallback(function(){ cargarEscena(i); }, { timeout:700 });
+    } else {
+      idleId = setTimeout(function(){ cargarEscena(i); }, 120);
+    }
   }
-  function activar(i){
-    grupos.forEach(function(g){ g.classList.toggle('activa', +g.dataset.i === i); });
-    nota.innerHTML = '<b>' + v.puntos[i].t + '</b>' + v.puntos[i].n;
-  }
-  grupos.forEach(function(g){
-    var i = +g.dataset.i;
-    g.addEventListener('mouseenter', function(){ activar(i); });
-    g.addEventListener('focus', function(){ activar(i); });
-    g.addEventListener('click', function(){ activar(i); });
-    g.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); activar(i); } });
-  });
-  activar(0);
 
-  document.getElementById('fichaAgendar').addEventListener('click',function(){
+  /* El texto y los indicadores cambian al instante; la fotografía entra en
+     cuanto termina de cargar, o tras una espera breve si la red se tarda,
+     para que el recorrido nunca se quede una escena atrás. */
+  function activarEscena(i){
+    i = Math.max(0, Math.min(escenas.length - 1, i));
+    if (i === activeIndex) return;
+    activeIndex = i;
+    copies.forEach(function(el, n){ el.classList.toggle('active', n === i); el.setAttribute('aria-hidden', n === i ? 'false' : 'true'); });
+    titles.forEach(function(el, n){ el.classList.toggle('active', n === i); });
+    dots.forEach(function(el, n){ el.classList.toggle('active', n <= i); });
+    current.textContent = String(i + 1).padStart(2,'0');
+    stage.classList.toggle('is-plan', !!escenas[i].plano);
+    var pintar = function(){
+      if (i !== activeIndex) return;
+      frames.forEach(function(el, n){ el.classList.toggle('active', n === i); el.setAttribute('aria-hidden', n === i ? 'false' : 'true'); });
+    };
+    cargarEscena(i, pintar);
+    setTimeout(pintar, 480);
+    precargar(i + 1);
+  }
+
+  function actualizarRecorrido(){
+    scrollFrame = null;
+    var max = Math.max(1, journey.offsetHeight - panelficha.clientHeight);
+    var local = Math.max(0, Math.min(max, panelficha.scrollTop - journey.offsetTop));
+    var progreso = local / max;
+    stage.style.setProperty('--journey', progreso.toFixed(4));
+    progressLine.style.transform = 'scaleX(' + progreso.toFixed(4) + ')';
+    activarEscena(Math.round(progreso * (escenas.length - 1)));
+  }
+
+  function pedirActualizacion(){
+    if (scrollFrame !== null) return;
+    scrollFrame = requestAnimationFrame(actualizarRecorrido);
+  }
+
+  function irAVisita(){
+    var interes = document.getElementById('interes');
+    if (interes){
+      var nombre = v.nombre.toLowerCase();
+      [].slice.call(interes.options).some(function(opcion, i){
+        if (opcion.text.toLowerCase().indexOf(nombre) === -1) return false;
+        interes.selectedIndex = i;
+        return true;
+      });
+    }
     cerrarFicha();
     setTimeout(function(){
       var destino = document.getElementById('agendar');
       if (destino) destino.scrollIntoView({ behavior: reducido() ? 'auto' : 'smooth', block:'start' });
     },560);
-  });
+  }
 
+  panelficha.addEventListener('scroll', pedirActualizacion, { passive:true });
+  window.addEventListener('resize', pedirActualizacion, { passive:true });
+  var notaPlano = document.getElementById('showroomPlanNote');
+  var puntosPlano = [].slice.call(panelficha.querySelectorAll('.showroomSvgPlan .pt'));
+  function activarPunto(i){
+    if (!notaPlano || !v.puntos[i]) return;
+    puntosPlano.forEach(function(punto, n){ punto.classList.toggle('activa', n === i); });
+    notaPlano.innerHTML = '<b>' + v.puntos[i].t + '</b><span>' + v.puntos[i].n + '</span>';
+  }
+  puntosPlano.forEach(function(punto, i){
+    punto.addEventListener('mouseenter', function(){ activarPunto(i); });
+    punto.addEventListener('focus', function(){ activarPunto(i); });
+    punto.addEventListener('click', function(){ activarPunto(i); });
+    punto.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); activarPunto(i); }
+    });
+  });
+  if (puntosPlano.length) activarPunto(0);
+  document.getElementById('fichaAgendar').addEventListener('click', irAVisita);
   document.getElementById('cerrarFicha').addEventListener('click', cerrarFicha);
+  precargar(1);
+  /* Con la ficha abierta, el resto del recorrido baja en segundo plano, una
+     escena a la vez: ningún giro rápido del scroll vuelve a esperar la red. */
+  if (!(navigator.connection && navigator.connection.saveData)){
+    var colaEscenas = [];
+    for (var k = 2; k < frames.length; k++) colaEscenas.push(k);
+    (function bombear(){
+      if (!colaEscenas.length) return;
+      cargarEscena(colaEscenas.shift(), function(){
+        if (window.requestIdleCallback) idleId = requestIdleCallback(bombear, { timeout:900 });
+        else idleId = setTimeout(bombear, 180);
+      });
+    })();
+  }
+  actualizarRecorrido();
+
+  return function(){
+    panelficha.removeEventListener('scroll', pedirActualizacion);
+    window.removeEventListener('resize', pedirActualizacion);
+    if (scrollFrame !== null) cancelAnimationFrame(scrollFrame);
+    if (idleId !== null){
+      if (window.cancelIdleCallback) window.cancelIdleCallback(idleId);
+      else clearTimeout(idleId);
+    }
+  };
 }
 
 /* el plano se ciñe a lo que realmente dibuja, así no deja aire muerto en su caja */
@@ -1045,11 +1176,13 @@ function abrirFicha(card){
   if (!v) return;
   ultimaTarjeta = card;
 
+  if (limpiarFichaActual) limpiarFichaActual();
   panelficha.innerHTML = construirFicha(v);
   prepareScatterCopy(panelficha, true);
-  cablearFicha(v);
   fullficha.classList.add('on');
   document.body.classList.add('bloqueado');
+  panelficha.scrollTop = 0;
+  limpiarFichaActual = cablearFicha(v);
   ajustarPlano();
 
   if (reducido()){
@@ -1058,8 +1191,10 @@ function abrirFicha(card){
     return;
   }
 
-  /* el empuje de cámara: la tarjeta crece hasta llenar la pantalla */
+  /* La fotografía viaja desde la tarjeta hasta el escenario del recorrido. */
   var r = card.getBoundingClientRect();
+  var escenario = panelficha.querySelector('.showroomMedia');
+  var destino = escenario ? escenario.getBoundingClientRect() : panelficha.getBoundingClientRect();
   var vol = document.createElement('div');
   vol.className = 'volador';
   vol.style.cssText = 'top:' + r.top + 'px;left:' + r.left + 'px;width:' + r.width + 'px;height:' + r.height +
@@ -1069,9 +1204,9 @@ function abrirFicha(card){
   requestAnimationFrame(function(){
     requestAnimationFrame(function(){
       vol.classList.add('va');
-      vol.style.top = '12px'; vol.style.left = '12px';
-      vol.style.width = 'calc(100vw - 24px)'; vol.style.height = 'calc(100vh - 24px)';
-      vol.style.borderRadius = '30px';
+      vol.style.top = destino.top + 'px'; vol.style.left = destino.left + 'px';
+      vol.style.width = destino.width + 'px'; vol.style.height = destino.height + 'px';
+      vol.style.borderRadius = '24px';
       vol.style.opacity = '0';
       fullficha.classList.add('abierta');
     });
@@ -1082,6 +1217,7 @@ function abrirFicha(card){
 function cerrarFicha(){
   fullficha.classList.remove('abierta');
   document.body.classList.remove('bloqueado');
+  if (limpiarFichaActual){ limpiarFichaActual(); limpiarFichaActual = null; }
   setTimeout(function(){
     fullficha.classList.remove('on');
     panelficha.innerHTML = '';
@@ -1097,7 +1233,17 @@ document.querySelectorAll('.obra[data-villa]').forEach(function(card){
 });
 velo.addEventListener('click', cerrarFicha);
 document.addEventListener('keydown', function(e){
-  if (e.key === 'Escape' && fullficha.classList.contains('on')) cerrarFicha();
+  if (!fullficha.classList.contains('on')) return;
+  if (e.key === 'Escape'){ cerrarFicha(); return; }
+  if (e.key !== 'Tab') return;
+  var focos = [].slice.call(panelficha.querySelectorAll('button,[href],[tabindex]:not([tabindex="-1"])')).filter(function(el){
+    return !el.disabled && el.getAttribute('aria-hidden') !== 'true' && el.offsetParent !== null;
+  });
+  if (!focos.length){ e.preventDefault(); panelficha.focus(); return; }
+  var primero = focos[0];
+  var ultimo = focos[focos.length - 1];
+  if (e.shiftKey && document.activeElement === primero){ e.preventDefault(); ultimo.focus(); }
+  else if (!e.shiftKey && document.activeElement === ultimo){ e.preventDefault(); primero.focus(); }
 });
 
 /* ---------------------------------------------------------------
