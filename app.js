@@ -572,8 +572,8 @@ function escalones(x, y, w, n, alto){
 
 var VILLAS = {
   palmar: {
-    nombre: 'casa palmar', lugar: 'Riviera Nayarit, Nayarit', num: 'N°034 · 2026',
-    precio: 'USD 1,680,000', m2: '520 m²', rec: '4 recámaras', estado: 'Disponible', libre: true,
+    nombre: 'casa palmar', lugar: 'Cartagena, Bolívar', num: 'N°034 · 2026',
+    precio: '$6.700.000.000 COP', m2: '520 m²', rec: '4 recámaras', estado: 'Disponible', libre: true,
     foto: 'assets/casa-palmar-exterior',
     planoImagen: 'assets/plano-palmar',
     planoAlt: 'Vista axonométrica de la distribución de Casa Palmar.',
@@ -599,8 +599,8 @@ var VILLAS = {
     ]
   },
   mirador: {
-    nombre: 'casa mirador', lugar: 'Tapalpa, Jalisco', num: 'N°041 · 2026',
-    precio: 'USD 2,240,000', m2: '610 m²', rec: '5 recámaras', estado: 'Disponible', libre: true,
+    nombre: 'casa mirador', lugar: 'Guatapé, Antioquia', num: 'N°041 · 2026',
+    precio: '$8.900.000.000 COP', m2: '610 m²', rec: '5 recámaras', estado: 'Disponible', libre: true,
     foto: 'assets/casa-mirador-exterior',
     planoImagen: 'assets/plano-mirador-corte',
     planoAlt: 'Vista axonométrica de la distribución de Casa Mirador.',
@@ -673,8 +673,8 @@ var VILLAS = {
     ]
   },
   corte: {
-    nombre: 'casa corte', lugar: 'Costa Careyes, Jalisco', num: 'N°008 · 2023',
-    precio: 'USD 980,000', m2: '265 m²', rec: '3 recámaras', estado: 'Reservado', libre: false,
+    nombre: 'casa corte', lugar: 'Santa Marta, Magdalena', num: 'N°008 · 2023',
+    precio: '$3.900.000.000 COP', m2: '265 m²', rec: '3 recámaras', estado: 'Reservado', libre: false,
     foto: 'assets/obra-corte',
     planoImagen: '',
     planoAlt: 'Vista axonométrica de la distribución de Casa Corte.',
@@ -695,7 +695,7 @@ var VILLAS = {
     puntos: [
       { x:286, y:136, t:'Voladizo de 9 metros', n:'Sostenido por dos muros de carga postensados. El cálculo estructural precedió al dibujo.' },
       { x:136, y:221, t:'Alberca', n:'El agua termina exactamente al nivel de la línea del horizonte visto desde el comedor.' },
-      { x:100, y:110, t:'Comedor', n:'Orientado al poniente, con el horizonte del Pacífico como único fondo.' },
+      { x:100, y:110, t:'Comedor', n:'Orientado al poniente, con el horizonte del Caribe como único fondo.' },
       { x:170, y:170, t:'Recámaras', n:'La sal obliga: todo el acero es inoxidable 316 y el concreto lleva aditivo impermeabilizante integral.' }
     ]
   },
